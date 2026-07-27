@@ -1,0 +1,2606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>任悦平 · 产品经理个人主页</title>
+<style>
+:root {
+  --bg: #0f1115;
+  --bg-card: #171a21;
+  --bg-card-hover: #1d2029;
+  --border: #262a35;
+  --accent: #ff7a00;
+  --accent-soft: rgba(255, 122, 0, 0.14);
+  --text-primary: #f1f2f4;
+  --text-secondary: #9aa0ac;
+  --text-tertiary: #6b7280;
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ===== 顶部导航 ===== */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: rgba(15, 17, 21, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-card);
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+
+.nav-tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.nav-tab:hover {
+  color: var(--text-primary);
+}
+
+.nav-tab.active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.nav-cta {
+  font-size: 13px;
+  color: #fff;
+  background: linear-gradient(135deg, #ffb100, #ff7a00);
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+}
+
+/* ===== 页面容器 ===== */
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.page-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--text-primary);
+}
+
+.page-desc {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  margin: 0 0 36px;
+  max-width: 640px;
+}
+
+/* ===== 移动端底部导航 ===== */
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .topnav {
+    padding: 14px 16px;
+  }
+  .nav-tabs {
+    display: none;
+  }
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 17, 21, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    z-index: 100;
+    padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+  }
+  .mobile-tab {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 6px 2px;
+    border-radius: 10px;
+  }
+  .mobile-tab.active {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .page {
+    padding: 32px 18px 100px;
+  }
+}
+
+/* ===== 主页 Hero ===== */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 20px 0 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 40px;
+}
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-greeting {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+}
+
+.hero-name {
+  font-size: 42px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  background: linear-gradient(135deg, #fff, #b8bcc4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-role {
+  font-size: 18px;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 18px;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.hero-tag {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.hero-contacts {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.hero-contacts span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-avatar-wrap {
+  position: relative;
+  width: 272px;
+  height: 296px;
+  flex-shrink: 0;
+}
+
+/* 拼贴背景色块 */
+.avatar-collage-shape {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 柔光光晕，让色块与背景更好地融合 */
+.shape-glow {
+  width: 230px;
+  height: 230px;
+  top: 4px;
+  left: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, rgba(255, 177, 0, 0.35), rgba(255, 122, 0, 0) 70%);
+  filter: blur(6px);
+}
+
+.shape-blob {
+  width: 196px;
+  height: 196px;
+  top: 24px;
+  left: 37px;
+  border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
+  background: linear-gradient(150deg, #ffc247, var(--accent) 60%, #e85e00);
+  box-shadow: inset 0 -12px 24px rgba(0, 0, 0, 0.18), inset 0 8px 18px rgba(255, 255, 255, 0.15);
+  opacity: 0.96;
+  animation: blobMorph 10s ease-in-out infinite;
+}
+
+.shape-ring {
+  width: 226px;
+  height: 226px;
+  top: 8px;
+  left: 22px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 177, 0, 0.5);
+}
+
+.shape-ring-inner {
+  width: 246px;
+  height: 246px;
+  top: -2px;
+  left: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 177, 0, 0.18);
+}
+
+.shape-square {
+  width: 40px;
+  height: 40px;
+  bottom: 18px;
+  right: 4px;
+  border-radius: 11px;
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border);
+  transform: rotate(18deg);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.shape-plus {
+  bottom: -4px;
+  left: 30px;
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 700;
+  opacity: 0.6;
+}
+
+/* 去背景人像贴纸图层 */
+.hero-avatar-cutout-wrap {
+  position: absolute;
+  z-index: 2;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 234px;
+  height: 208px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 99%);
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 99%);
+}
+
+.hero-avatar-cutout-inner {
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+}
+
+.hero-avatar-cutout {
+  display: block;
+  width: 234px;
+  height: auto;
+  max-width: none;
+  position: relative;
+  left: 50%;
+  top: -2px;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 14px 16px rgba(0, 0, 0, 0.35));
+}
+
+/* 无照片时的圆形占位头像 */
+.hero-avatar-fallback {
+  width: 196px;
+  height: 196px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 8px var(--accent-soft);
+  position: absolute;
+  z-index: 2;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 177, 0, 0.5), rgba(255, 122, 0, 0.15));
+  animation: floatBubble 6s ease-in-out infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.bubble-ring {
+  background: transparent;
+  border: 1.5px solid rgba(255, 177, 0, 0.55);
+}
+
+.bubble1 { width: 20px; height: 20px; top: 14px; right: 2px; animation-delay: 0s; }
+.bubble2 { width: 12px; height: 12px; top: 56px; right: -8px; animation-delay: 1.2s; }
+.bubble3 { width: 26px; height: 26px; bottom: 30px; left: -12px; animation-delay: 2.4s; }
+.bubble4 { width: 15px; height: 15px; bottom: 78px; right: -14px; animation-delay: 3.2s; }
+.bubble5 { width: 9px; height: 9px; top: 96px; left: -10px; animation-delay: 4.4s; }
+.bubble6 { width: 30px; height: 30px; top: -8px; left: 46px; animation-delay: 0.6s; }
+
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.85; }
+  50% { transform: translateY(-16px) scale(1.15); opacity: 1; }
+}
+
+@keyframes blobMorph {
+  0%, 100% { border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; }
+  50% { border-radius: 55% 45% 42% 58% / 42% 55% 45% 58%; }
+}
+
+/* 核心亮点卡片 */
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 44px;
+}
+
+.highlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: all 0.25s ease;
+}
+
+.highlight-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.highlight-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  margin: 0 0 6px;
+}
+
+.highlight-label {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* 可点击引导卡：Vibe Coding 作品集入口 */
+.highlight-card.clickable {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-color: var(--accent-soft);
+  background: linear-gradient(135deg, rgba(255, 122, 0, 0.1), var(--bg-card) 60%);
+}
+
+.highlight-card.clickable::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  opacity: 0.55;
+  animation: highlightPulse 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes highlightPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0.35); opacity: 0.8; }
+  70% { box-shadow: 0 0 0 10px rgba(255, 122, 0, 0); opacity: 0; }
+  100% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0); opacity: 0; }
+}
+
+.highlight-card.clickable:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px) scale(1.01);
+}
+
+.highlight-card .highlight-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 8px;
+}
+
+.highlight-card .highlight-cta .arrow {
+  display: inline-block;
+  animation: arrowNudge 1.4s ease-in-out infinite;
+}
+
+@keyframes arrowNudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+/* 关于我 */
+.about-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 30px;
+  margin-bottom: 44px;
+}
+
+.about-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.about-title .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 3px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.about-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* 简历下载区 */
+.resume-download {
+  background: linear-gradient(135deg, rgba(255, 177, 0, 0.12), rgba(255, 122, 0, 0.04));
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.resume-download-left h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+
+.resume-download-left p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.resume-btn-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 22px;
+  font-size: 13.5px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 760px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .hero-tags, .hero-contacts {
+    justify-content: center;
+  }
+  .hero-name {
+    font-size: 32px;
+  }
+  .highlight-grid {
+    grid-template-columns: 1fr;
+  }
+  .resume-download {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ===== 实习经历时间轴 ===== */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--border) 90%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -32px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--accent);
+}
+
+.timeline-company-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.timeline-company {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.timeline-role {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.timeline-time {
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+
+.exp-project {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 16px;
+}
+
+.exp-project:last-child {
+  margin-bottom: 0;
+}
+
+.exp-project-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.exp-project-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.exp-project-time {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.exp-label {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 9px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.exp-text {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+}
+
+.exp-text:last-of-type {
+  margin-bottom: 0;
+}
+
+.exp-result {
+  font-size: 13px;
+  color: var(--text-primary);
+  background: rgba(255, 122, 0, 0.08);
+  border: 1px solid var(--accent-soft);
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-top: 14px;
+}
+
+.exp-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.exp-tag {
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+@media (max-width: 760px) {
+  .timeline {
+    padding-left: 24px;
+  }
+  .timeline-dot {
+    left: -24px;
+  }
+}
+
+/* ===== Vibe Coding 作品集 ===== */
+.work-group-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 36px 0 18px;
+}
+
+.work-group-title:first-of-type {
+  margin-top: 0;
+}
+
+.work-group-title .wgt-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.work-group-desc {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin: -10px 0 18px;
+}
+
+.work-card {
+  display: flex;
+  gap: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 28px;
+  align-items: flex-start;
+}
+
+.work-card:last-child {
+  margin-bottom: 0;
+}
+
+.work-card.reverse {
+  flex-direction: row-reverse;
+}
+
+.work-image-wrap {
+  flex: 0 0 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  max-height: 420px;
+}
+
+.work-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.work-image-cover {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  padding: 24px;
+  color: #fff;
+}
+
+.work-image-cover .wic-icon {
+  font-size: 34px;
+  margin-bottom: 4px;
+}
+
+.work-image-cover .wic-num {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.work-image-cover .wic-label {
+  font-size: 12.5px;
+  opacity: 0.85;
+  letter-spacing: 0.02em;
+}
+
+.work-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.work-badge {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.work-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: var(--text-primary);
+}
+
+.work-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+}
+
+.work-stats {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.work-stat {
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+}
+
+.work-stat strong {
+  color: var(--accent);
+  font-size: 15px;
+  display: block;
+}
+
+.work-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.work-tag {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.work-links {
+  display: flex;
+  gap: 10px;
+}
+
+.work-link {
+  font-size: 12.5px;
+  color: var(--text-primary);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.work-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.work-link.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.work-link.primary:hover {
+  color: #fff;
+  opacity: 0.85;
+}
+
+@media (max-width: 760px) {
+  .work-card, .work-card.reverse {
+    flex-direction: column;
+  }
+  .work-image-wrap {
+    flex: none;
+    width: 100%;
+    max-height: 260px;
+  }
+}
+
+/* ===== 教育背景 ===== */
+.edu-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  margin-bottom: 20px;
+}
+
+.edu-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.edu-school {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.edu-degree {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.edu-time {
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+}
+
+.edu-major {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 4px 0 0;
+}
+
+.edu-detail-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  margin-bottom: 20px;
+}
+
+.edu-detail-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+
+.edu-detail-text {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.honor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.honor-item {
+  display: flex;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  align-items: baseline;
+}
+
+.honor-year {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 9px;
+  border-radius: 6px;
+}
+
+/* ===== 技能爱好抽卡 ===== */
+.divination-stage {
+  position: relative;
+  border-radius: 20px;
+  padding: 32px 24px 28px;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 122, 0, 0.14), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(155, 92, 255, 0.16), transparent 50%),
+    linear-gradient(160deg, #14141c, #1b1a26 55%, #14141c);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.divination-stage::before {
+  content: "✦ ✧ ✦";
+  position: absolute;
+  top: 14px; right: 20px;
+  font-size: 12px;
+  letter-spacing: 6px;
+  color: rgba(255, 177, 0, 0.5);
+  pointer-events: none;
+}
+
+.skills-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.skills-tab-btn {
+  padding: 9px 20px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.skills-tab-btn.active {
+  background: linear-gradient(135deg, #ff7a00, #ffb100);
+  border-color: transparent;
+  color: #fff;
+}
+
+.card-hint {
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.divination-counter {
+  font-size: 12.5px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 牌堆区：未抽的卡牌 */
+.deck-area {
+  position: relative;
+  z-index: 1;
+  min-height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.deck-pile {
+  position: relative;
+  width: 118px;
+  height: 168px;
+  flex-shrink: 0;
+}
+
+.deck-pile .deck-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background:
+    repeating-linear-gradient(45deg, rgba(255,177,0,0.10) 0 8px, rgba(255,122,0,0.04) 8px 16px),
+    linear-gradient(160deg, #2a2438, #1c1826);
+  border: 1px solid rgba(255, 177, 0, 0.35);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: rgba(255, 177, 0, 0.55);
+  transition: transform 0.2s ease;
+}
+
+.deck-pile .deck-card:nth-child(1) { transform: translate(0, 0) rotate(0deg); z-index: 5; }
+.deck-pile .deck-card:nth-child(2) { transform: translate(3px, -4px) rotate(-3deg); z-index: 4; }
+.deck-pile .deck-card:nth-child(3) { transform: translate(-3px, -8px) rotate(3deg); z-index: 3; }
+
+.deck-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.deck-draw-btn {
+  padding: 14px 30px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #ff7a00, #ffb100);
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  box-shadow: 0 8px 20px rgba(255, 122, 0, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.deck-draw-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255, 122, 0, 0.4);
+}
+
+.deck-draw-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.deck-draw-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.deck-reset-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deck-reset-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--text-tertiary);
+}
+
+.deck-empty-msg {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+/* 已抽出的卡牌网格 */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-grid:empty { display: none; }
+
+.flip-card {
+  perspective: 1000px;
+  height: 180px;
+  cursor: pointer;
+  animation: cardDrawIn 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.1);
+}
+
+@keyframes cardDrawIn {
+  0% { opacity: 0; transform: translateY(-24px) scale(0.85) rotate(-6deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.flip-card-front {
+  background:
+    repeating-linear-gradient(45deg, rgba(255,177,0,0.08) 0 8px, rgba(255,122,0,0.03) 8px 16px),
+    linear-gradient(135deg, var(--bg-card), #1d2029);
+}
+
+.flip-card-front .card-icon {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.flip-card-front .card-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.flip-card-front .card-tap-hint {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 8px;
+}
+
+.flip-card-back {
+  background: linear-gradient(135deg, #ff7a00, #ffb100);
+  transform: rotateY(180deg);
+  color: #fff;
+}
+
+.flip-card-back .card-back-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.flip-card-back .card-back-desc {
+  font-size: 12px;
+  opacity: 0.95;
+}
+
+@media (max-width: 760px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .deck-area {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ===== 温酒风格 · 沉浸式多巴胺视觉重构 ===== */
+:root {
+  --bg: #08080f;
+  --bg-deep: #06060c;
+  --bg-card: rgba(255, 255, 255, 0.055);
+  --bg-card-hover: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.11);
+  --accent: #ff6b9d;
+  --accent-soft: rgba(255, 107, 157, 0.16);
+  --text-primary: rgba(255, 255, 255, 0.96);
+  --text-secondary: rgba(255, 255, 255, 0.68);
+  --text-tertiary: rgba(255, 255, 255, 0.46);
+  --purple: #b829f5;
+  --cyan: #00d2ff;
+  --mint: #3effcc;
+  --radius: 24px;
+  --gradient-neon: linear-gradient(135deg, #b829f5 0%, #ff6b9d 55%, #ff9b6a 100%);
+  --gradient-aurora: linear-gradient(135deg, #00d2ff 0%, #3effcc 100%);
+  --glass: rgba(255, 255, 255, 0.065);
+  --glass-border: rgba(255, 255, 255, 0.13);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse 60% 44% at 1% 0%, rgba(184, 41, 245, 0.21), transparent 70%),
+    radial-gradient(ellipse 48% 36% at 100% 12%, rgba(0, 210, 255, 0.16), transparent 72%),
+    radial-gradient(ellipse 55% 38% at 50% 100%, rgba(255, 107, 157, 0.11), transparent 75%),
+    var(--bg);
+  font-family: Inter, "SF Pro Display", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+}
+
+.topnav {
+  position: sticky;
+  top: 14px;
+  width: min(1220px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 10px 14px 10px 20px;
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  background: rgba(10, 10, 20, 0.65);
+  backdrop-filter: blur(24px) saturate(130%);
+  -webkit-backdrop-filter: blur(24px) saturate(130%);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, .22), inset 0 1px rgba(255,255,255,.07);
+}
+
+.brand { font-size: 15px; letter-spacing: .08em; }
+.brand-dot { width: 10px; height: 10px; background: var(--gradient-aurora); box-shadow: 0 0 18px rgba(62, 255, 204, .8); }
+.nav-tabs { background: rgba(255,255,255,.045); border-color: rgba(255,255,255,.08); padding: 4px; }
+.nav-tab { padding: 8px 15px; border-radius: 14px; }
+.nav-tab.active { background: var(--gradient-neon); box-shadow: 0 6px 20px rgba(255, 107, 157, .23); }
+.nav-cta { position: relative; isolation: isolate; padding: 10px 17px; background: var(--gradient-aurora); border-radius: 14px; color: #061411; box-shadow: 0 4px 20px rgba(0, 210, 255, .25); }
+
+.page { max-width: 1220px; padding: 92px 34px 110px; animation: pageEnter .6s cubic-bezier(.16,1,.3,1); }
+@keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+.section-label, .work-badge, .exp-label, .edu-degree {
+  border: 1px solid rgba(255,255,255,.11);
+  background: linear-gradient(135deg, rgba(184,41,245,.22), rgba(0,210,255,.12));
+  color: #d9c7ff;
+  box-shadow: inset 0 1px rgba(255,255,255,.1);
+}
+
+.page-title { font-size: clamp(38px, 5vw, 64px); letter-spacing: -.055em; line-height: 1.05; margin-bottom: 16px; }
+.page-title, .hero-name { text-wrap: balance; }
+.page-desc { font-size: 16px; line-height: 1.8; max-width: 760px; }
+
+.hero {
+  position: relative;
+  min-height: 480px;
+  align-items: center;
+  gap: 60px;
+  padding: 56px 54px;
+  margin: -18px 0 62px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 78% 22%, rgba(0,210,255,.22), transparent 25%),
+    radial-gradient(circle at 21% 88%, rgba(184,41,245,.25), transparent 37%),
+    rgba(255,255,255,.045);
+  box-shadow: inset 0 1px rgba(255,255,255,.11), 0 30px 90px rgba(0,0,0,.25);
+}
+.hero::after { content:""; position:absolute; width:420px; height:420px; border:1px solid rgba(62,255,204,.15); border-radius:50%; right:-120px; top:-120px; box-shadow:0 0 100px rgba(0,210,255,.13); pointer-events:none; }
+.hero-left { position:relative; z-index:2; }
+.hero-greeting { color: var(--mint); letter-spacing: .08em; font-weight: 650; }
+.hero-name { font-size: clamp(56px, 8vw, 96px); line-height: .98; letter-spacing: -.075em; background: linear-gradient(120deg, #fff 20%, #e9d5ff 47%, #8de9ff 100%); -webkit-background-clip:text; background-clip:text; }
+.hero-role { color: #fff; font-size: 20px; font-weight: 700; margin: 18px 0 24px; }
+.hero-tag { background: rgba(255,255,255,.065); border-color:rgba(255,255,255,.13); color:rgba(255,255,255,.75); padding:7px 13px; backdrop-filter: blur(10px); }
+.hero-contacts { color: rgba(255,255,255,.55); }
+.hero-avatar-wrap { z-index: 2; transform: scale(1.1); }
+.shape-blob { background: var(--gradient-neon); box-shadow: inset 0 -12px 26px rgba(42,0,83,.32), inset 0 8px 18px rgba(255,255,255,.24), 0 0 58px rgba(184,41,245,.48); }
+.shape-glow { background: radial-gradient(circle at 40% 35%, rgba(0,210,255,.5), rgba(184,41,245,0) 70%); }
+.shape-ring { border-color: rgba(62,255,204,.6); }
+.shape-ring-inner { border-color: rgba(255,107,157,.35); }
+.bubble { background: linear-gradient(135deg, rgba(0,210,255,.75), rgba(184,41,245,.2)); box-shadow: 0 0 24px rgba(0,210,255,.42); }
+.bubble-ring { border-color: rgba(255,107,157,.72); background: transparent; }
+
+.highlight-grid { gap: 20px; margin-bottom: 58px; }
+.highlight-card, .about-block, .exp-project, .work-card, .edu-card, .edu-detail-block {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: inset 0 1px rgba(255,255,255,.07), 0 12px 36px rgba(0,0,0,.12);
+}
+.highlight-card { padding: 28px; border-radius: 24px; }
+.highlight-card:hover, .work-card:hover, .exp-project:hover, .edu-card:hover, .edu-detail-block:hover { border-color: rgba(62,255,204,.46); background: rgba(255,255,255,.095); transform: translateY(-5px); box-shadow: 0 18px 44px rgba(0,0,0,.2), 0 0 35px rgba(0,210,255,.08); }
+.highlight-num { font-size: 34px; background: var(--gradient-aurora); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.highlight-card.clickable { background: linear-gradient(135deg, rgba(184,41,245,.25), rgba(255,107,157,.13) 60%, rgba(255,255,255,.06)); border-color: rgba(255,107,157,.38); }
+.highlight-card .highlight-cta { color: #ffc1d6; }
+.about-block { padding: 34px 38px; border-radius: 28px; margin-bottom: 52px; }
+.about-title .dot { background: var(--gradient-neon); box-shadow: 0 0 16px rgba(255,107,157,.8); }
+.about-text { font-size: 15px; line-height: 1.9; }
+
+.resume-download { position:relative; overflow:hidden; border-color: rgba(62,255,204,.3); background: linear-gradient(120deg, rgba(0,210,255,.15), rgba(184,41,245,.22), rgba(255,107,157,.15)); box-shadow: 0 20px 60px rgba(184,41,245,.12); }
+.resume-download::after { content:""; position:absolute; width:250px; height:250px; right:-60px; top:-140px; border-radius:50%; background:rgba(62,255,204,.18); filter:blur(35px); }
+.resume-download-left, .resume-btn-group { z-index:1; }
+.btn { border-radius: 14px; padding: 13px 20px; }
+.btn-primary { background: var(--gradient-neon); box-shadow:0 10px 24px rgba(255,107,157,.28); }
+.btn-ghost { background:rgba(8,8,15,.26); border-color:rgba(255,255,255,.22); backdrop-filter:blur(8px); }
+
+.timeline { padding-left: 40px; }
+.timeline::before { width: 2px; background: linear-gradient(180deg, var(--cyan), var(--purple) 45%, rgba(255,255,255,.08)); box-shadow: 0 0 16px rgba(0,210,255,.32); }
+.timeline-dot { left: -40px; background:#0b0b14; border-color:var(--mint); box-shadow:0 0 0 7px rgba(62,255,204,.1), 0 0 18px rgba(62,255,204,.55); }
+.timeline-company { font-size: 23px; letter-spacing: -.025em; }
+.exp-project { padding: 28px 30px; border-radius: 24px; transition:all .3s ease; }
+.exp-project-name { color:#e5d5ff; font-size:16px; }
+.exp-result { background:linear-gradient(135deg, rgba(0,210,255,.12), rgba(62,255,204,.08)); border-color:rgba(62,255,204,.22); border-radius:14px; color:rgba(255,255,255,.84); }
+.exp-tag, .work-tag { border-color:rgba(255,255,255,.12); background:rgba(255,255,255,.045); }
+
+.work-group-title { margin-top: 50px; font-size: 19px; }
+.work-group-title .wgt-badge { background: var(--gradient-neon); color:#fff; box-shadow:0 5px 16px rgba(255,107,157,.24); }
+.work-card { position:relative; padding: 26px; border-radius: 28px; gap: 38px; transition: all .3s ease; }
+.work-image-wrap { border-radius:20px; border-color:rgba(255,255,255,.13); box-shadow:0 12px 30px rgba(0,0,0,.24); }
+.work-image-cover { position:relative; overflow:hidden; }
+.work-image-cover::before { content:""; position:absolute; width:180px; height:180px; border-radius:50%; background:rgba(255,255,255,.17); filter:blur(10px); top:-80px; right:-35px; }
+.work-image-cover > * { position:relative; z-index:1; }
+.work-title { font-size: 22px; letter-spacing:-.025em; }
+.work-stat strong { background:var(--gradient-aurora); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.work-link { border-radius:12px; background:rgba(255,255,255,.045); }
+.work-link.primary { background:var(--gradient-aurora); border-color:transparent; color:#06221d; font-weight:800; }
+
+.edu-card, .edu-detail-block { padding: 30px 32px; border-radius: 24px; transition: all .3s ease; }
+.edu-school { font-size: 22px; }
+.honor-year { color:#e5d5ff; background:rgba(184,41,245,.17); }
+
+.divination-stage { border-radius:30px; padding:40px; background:radial-gradient(circle at 8% 15%, rgba(184,41,245,.34), transparent 28%), radial-gradient(circle at 96% 100%, rgba(0,210,255,.23), transparent 36%), rgba(255,255,255,.05); border-color:rgba(255,255,255,.13); box-shadow:inset 0 1px rgba(255,255,255,.1), 0 22px 55px rgba(0,0,0,.2); }
+.skills-tab-btn.active, .deck-draw-btn { background:var(--gradient-neon); box-shadow:0 10px 22px rgba(255,107,157,.28); }
+.deck-pile .deck-card, .flip-card-front { border-color:rgba(62,255,204,.33); background:repeating-linear-gradient(45deg, rgba(0,210,255,.1) 0 8px, rgba(184,41,245,.04) 8px 16px), linear-gradient(160deg,#1b1730,#101826); }
+.flip-card-back { background:var(--gradient-neon); }
+
+@media (max-width: 760px) {
+  .topnav { top: 8px; width: calc(100% - 20px); border-radius: 16px; padding: 9px 12px 9px 16px; }
+  .nav-cta { font-size:12px; padding:9px 12px; }
+  .mobile-nav { background:rgba(8,8,15,.78); backdrop-filter:blur(20px); border-color:rgba(255,255,255,.12); }
+  .mobile-tab.active { color:var(--mint); }
+  .page { padding: 54px 18px 110px; }
+  .hero { min-height:auto; padding:36px 24px 30px; margin: -16px 0 40px; border-radius:26px; gap:20px; }
+  .hero-avatar-wrap { transform:scale(.88); margin:-16px 0 -24px; }
+  .page-title { font-size:40px; }
+  .highlight-grid { gap:14px; margin-bottom:38px; }
+  .highlight-card, .about-block, .exp-project, .work-card, .edu-card, .edu-detail-block { border-radius:20px; }
+  .about-block { padding:26px 22px; }
+  .timeline { padding-left:26px; }
+  .timeline-dot { left:-26px; }
+  .divination-stage { padding:24px 18px; border-radius:24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; }
+}
+
+/* 网络资源应用策略：采用 Haikei（SVG 形状生成）和 unDraw（MIT 许可插画）的视觉方法，
+   本页不直接热链第三方图片，而以本地 CSS/SVG 构建同类可控元素，保证加载、性能与隐私。 */
+.orbit-system {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -80px;
+  top: -38px;
+  z-index: 1;
+  pointer-events: none;
+}
+.orbit-system .orbit {
+  position: absolute;
+  inset: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .13);
+  transform: rotate(-24deg);
+}
+.orbit-system .orbit--inner { inset: 70px 18px; border-color: rgba(62,255,204,.26); transform: rotate(31deg); }
+.orbit-system .orbit--tilt { inset: 116px 0; border-color: rgba(255,107,157,.25); transform: rotate(-50deg); }
+.orbit-system .planet {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.95) 0 5%, #a8f7ff 8%, #43c6eb 35%, #6b42d5 75%);
+  box-shadow: inset -14px -14px 22px rgba(21, 16, 76, .42), 0 0 32px rgba(0, 210, 255, .48);
+  animation: orbitFloat 7s ease-in-out infinite;
+}
+.orbit-system .planet--main { width: 92px; height: 92px; right: 36px; top: 108px; }
+.orbit-system .planet--mini { width: 30px; height: 30px; left: 74px; bottom: 87px; background: radial-gradient(circle at 28% 24%, #fff 0 7%, #ffc1d6 10%, #ff6b9d 48%, #b829f5 100%); animation-delay: -2s; }
+.orbit-system .crystal {
+  position: absolute;
+  width: 76px;
+  height: 92px;
+  left: 144px;
+  top: 45px;
+  clip-path: polygon(50% 0, 96% 31%, 77% 100%, 24% 100%, 4% 31%);
+  background: linear-gradient(135deg, rgba(255,255,255,.96) 0 12%, #b7f8ff 24%, #ac70ff 56%, #ff79ad 100%);
+  filter: drop-shadow(0 12px 16px rgba(184,41,245,.34));
+  transform: rotate(18deg);
+  animation: crystalFloat 5.5s ease-in-out infinite;
+}
+.orbit-system .spark { position:absolute; color:#fff; font-size:22px; text-shadow:0 0 18px rgba(62,255,204,.9); animation:sparkle 2.5s ease-in-out infinite alternate; }
+.orbit-system .spark--one { top: 30px; right: 88px; }
+.orbit-system .spark--two { bottom: 61px; right: 8px; color:#ffd66b; animation-delay:-1.3s; }
+@keyframes orbitFloat { 0%,100% { transform:translate3d(0,0,0); } 50% { transform:translate3d(-7px,-13px,0) scale(1.04); } }
+@keyframes crystalFloat { 0%,100% { transform:rotate(18deg) translateY(0); } 50% { transform:rotate(28deg) translateY(-13px); } }
+@keyframes sparkle { from { opacity:.38; transform:scale(.72) rotate(0); } to { opacity:1; transform:scale(1.15) rotate(18deg); } }
+
+.hero-visual-label {
+  position:absolute;
+  z-index:3;
+  right:36px;
+  bottom:28px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:999px;
+  color:rgba(255,255,255,.74);
+  font-size:11px;
+  letter-spacing:.08em;
+  background:rgba(8,8,15,.38);
+  backdrop-filter:blur(14px);
+}
+.hero-visual-label::before { content:"✦"; color:var(--mint); font-size:14px; }
+
+/* 为实习、作品、教育页面加入低干扰的流体 SVG 背景层。 */
+.page:not(#page-home) { position:relative; isolation:isolate; }
+.page:not(#page-home)::before {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:340px;
+  height:330px;
+  right:-155px;
+  top:110px;
+  opacity:.7;
+  filter:blur(1px);
+  background: radial-gradient(circle at 30% 25%, rgba(62,255,204,.26), transparent 27%), radial-gradient(circle at 62% 57%, rgba(184,41,245,.30), transparent 48%), radial-gradient(circle at 30% 76%, rgba(255,107,157,.19), transparent 46%);
+  clip-path: polygon(50% 0%, 75% 7%, 96% 28%, 89% 53%, 100% 75%, 77% 94%, 49% 87%, 25% 100%, 5% 78%, 13% 51%, 0 28%, 27% 14%);
+}
+.page:not(#page-home)::after {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:-95px;
+  bottom:55px;
+  width:250px;
+  height:250px;
+  border-radius:52% 48% 64% 36% / 42% 55% 45% 58%;
+  background:linear-gradient(135deg, rgba(0,210,255,.14), rgba(184,41,245,.10), transparent 72%);
+  filter:blur(18px);
+}
+
+.work-card::after {
+  content:"";
+  position:absolute;
+  right:26px;
+  top:26px;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--mint);
+  box-shadow:0 0 0 5px rgba(62,255,204,.08), 0 0 16px rgba(62,255,204,.78);
+}
+
+@media (max-width: 760px) {
+  .orbit-system { transform:scale(.62); transform-origin:top right; right:-105px; top:-76px; opacity:.72; }
+  .hero-visual-label { right:18px; bottom:16px; font-size:10px; }
+  .page:not(#page-home)::before { width:230px; height:230px; right:-120px; top:80px; opacity:.48; }
+  .page:not(#page-home)::after { width:150px; height:150px; left:-90px; }
+}
+
+/* ===== 求职作品集 Art Direction · 高级感二次精修 ===== */
+:root {
+  --ink-100: #f7f7ff;
+  --ink-70: rgba(239, 241, 255, .72);
+  --ink-48: rgba(220, 224, 248, .5);
+  --line-subtle: rgba(224, 230, 255, .1);
+  --electric: #FF8AAD;
+  --signal: #FFE066;
+  --violet: #C9B1FF;
+  --panel-deep: rgba(24, 12, 32, .66);
+}
+
+body {
+  background-color: #0B0914;
+  background-image:
+    radial-gradient(ellipse 52% 38% at 6% -5%, rgba(184, 41, 245, .24), transparent 70%),
+    radial-gradient(ellipse 36% 30% at 100% 13%, rgba(255, 107, 157, .16), transparent 72%),
+    radial-gradient(ellipse 32% 26% at 86% 82%, rgba(255, 107, 53, .10), transparent 72%),
+    linear-gradient(180deg, #100A1B 0%, #0C0915 46%, #0B0914 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .22;
+  background-image: linear-gradient(rgba(255, 181, 214, .055) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 181, 214, .055) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, #000, transparent 64%);
+}
+
+.topnav {
+  top: 18px;
+  max-width: 1280px;
+  border-radius: 18px;
+  background: rgba(22, 11, 31, .72);
+  border-color: rgba(255, 189, 221, .16);
+  box-shadow: 0 22px 58px rgba(0, 0, 0, .25), inset 0 1px rgba(255,255,255,.09);
+}
+.brand { font-weight: 760; letter-spacing: .11em; }
+.brand::after { content: "PRODUCT PORTFOLIO"; margin-left: 8px; color: var(--ink-48); font-size: 9px; font-weight: 600; letter-spacing: .13em; }
+.brand-dot { background: linear-gradient(135deg, var(--signal), var(--electric)); box-shadow: 0 0 18px rgba(255,107,157,.5); }
+.nav-tab { font-size: 12.5px; letter-spacing: .02em; }
+.nav-tab.active { background: rgba(255,255,255,.09); color: var(--ink-100); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), 0 5px 16px rgba(0,0,0,.18); }
+.nav-cta { color: #fff; background: linear-gradient(135deg, #B829F5, #FF6B9D 55%, #FF8A5B); font-size: 12px; font-weight: 800; letter-spacing: .04em; box-shadow: 0 8px 22px rgba(184,41,245,.26); }
+
+.page { max-width: 1280px; padding-top: 108px; }
+.hero {
+  min-height: 530px;
+  padding: 66px 66px 54px;
+  border-radius: 30px;
+  border-color: rgba(210, 220, 255, .15);
+  background:
+    linear-gradient(100deg, rgba(25, 12, 38, .90) 0%, rgba(31, 13, 43, .68) 54%, rgba(49, 18, 50, .38) 100%),
+    radial-gradient(circle at 92% 20%, rgba(255,107,157,.26), transparent 27%),
+    radial-gradient(circle at 22% 100%, rgba(184,41,245,.30), transparent 42%),
+    radial-gradient(circle at 74% 94%, rgba(255,107,53,.13), transparent 30%);
+  box-shadow: 0 34px 110px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.1);
+}
+.hero::before { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg, transparent 49.9%, rgba(255,255,255,.055) 50%, transparent 50.1%); opacity:.5; }
+.hero-left { max-width: 655px; }
+.hero-greeting { display: inline-flex; align-items:center; gap:8px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--electric); }
+.hero-greeting::before { content:""; width: 24px; height:1px; background:currentColor; box-shadow:0 0 10px currentColor; }
+.hero-name { font-size: clamp(64px, 7.3vw, 104px); letter-spacing: -.09em; background: linear-gradient(110deg, #fff 10%, #FFE6F0 42%, #FF9FC4 82%); -webkit-background-clip:text; background-clip:text; }
+.hero-role { font-size: 21px; font-weight: 620; letter-spacing: .015em; color: var(--ink-70); }
+.hero-role::after { content:""; display:inline-block; width:7px; height:7px; margin-left:12px; border-radius:50%; background:var(--signal); box-shadow:0 0 0 5px rgba(255,224,102,.10), 0 0 15px rgba(255,224,102,.8); vertical-align:middle; }
+.hero-tag { padding: 7px 12px; color:rgba(243,246,255,.78); background:rgba(255,255,255,.055); border-color:rgba(221,229,255,.13); }
+.hero-contacts { padding-top: 4px; color:var(--ink-48); }
+.hero-avatar-wrap { transform: scale(1.14) translateY(9px); }
+.hero-visual-label { right: 42px; bottom: 34px; color:rgba(236,244,255,.62); border-color:rgba(217,231,255,.16); }
+.orbit-system { opacity:.9; }
+.orbit-system .planet--main { background:radial-gradient(circle at 28% 24%, #fff 0 4%, #c9f9ff 7%, #7cb8ff 28%, #5e5de3 60%, #261e70 100%); }
+
+.highlight-grid { position:relative; gap: 14px; margin-bottom: 66px; }
+.highlight-grid::before { content:"SELECTED PROOF"; position:absolute; left:0; top:-30px; font-size:10px; letter-spacing:.16em; color:var(--ink-48); font-weight:700; }
+.highlight-card { min-height: 154px; padding: 29px 28px; border-radius: 20px; background:rgba(31,15,43,.58); border-color:var(--line-subtle); }
+.highlight-card::before { content:""; display:block; width:24px; height:2px; margin-bottom:18px; background:linear-gradient(90deg, var(--electric), transparent); }
+.highlight-card:hover { border-color:rgba(255,138,173,.48); transform:translateY(-5px); }
+.highlight-num { font-size: 36px; line-height:1; letter-spacing:-.055em; background:linear-gradient(135deg,#fff 10%,#FFB3CF 62%,#FFE066); -webkit-background-clip:text; background-clip:text; }
+.highlight-label { max-width: 270px; font-size:12.5px; line-height:1.65; color:var(--ink-70); }
+.highlight-card.clickable { background:linear-gradient(135deg, rgba(184,41,245,.34), rgba(74,20,70,.56) 56%, rgba(255,107,157,.20)); border-color:rgba(255,159,196,.28); }
+
+.about-block { position:relative; padding:42px 44px 38px 152px; background:linear-gradient(120deg, rgba(43,18,54,.80), rgba(30,13,39,.50)); border-radius:24px; overflow:hidden; }
+.about-block::before { content:"ABOUT"; position:absolute; left:31px; top:33px; color:rgba(255,138,173,.82); writing-mode:vertical-rl; font-size:11px; font-weight:700; letter-spacing:.22em; }
+.about-block::after { content:""; position:absolute; left:71px; top:31px; bottom:31px; width:1px; background:linear-gradient(var(--electric), transparent); opacity:.5; }
+.about-title { font-size:18px; letter-spacing:-.02em; }
+.about-text { max-width:900px; color:var(--ink-70); }
+
+.resume-download { padding:36px 40px; border-radius:24px; border-color:rgba(255,138,173,.34); background:linear-gradient(108deg, rgba(71,22,77,.88), rgba(79,23,74,.78) 55%, rgba(115,42,54,.62)); }
+.resume-download::before { content:"OPEN TO PRODUCT OPPORTUNITIES"; position:absolute; top:18px; left:40px; color:rgba(255,205,225,.54); font-size:9px; letter-spacing:.16em; font-weight:700; }
+.resume-download-left { padding-top:14px; }
+.resume-download-left h3 { font-size:20px; letter-spacing:-.025em; }
+.btn-primary { background:linear-gradient(135deg,#B829F5,#FF6B9D 54%,#FF8A5B); color:#fff; box-shadow:0 10px 28px rgba(184,41,245,.28); }
+.btn-ghost { border-color:rgba(228,237,255,.22); }
+
+.section-label { color:var(--electric); border-color:rgba(255,138,173,.28); background:rgba(255,107,157,.09); letter-spacing:.12em; }
+.page-title { font-size:clamp(42px,5vw,68px); letter-spacing:-.065em; }
+.page-desc { color:var(--ink-70); }
+.timeline-company { color:var(--ink-100); }
+.timeline-role, .timeline-time { color:var(--ink-48); }
+.exp-project { position:relative; padding:32px 34px; background:rgba(31,15,43,.59); }
+.exp-project::before { content:""; position:absolute; left:0; top:28px; bottom:28px; width:2px; background:linear-gradient(var(--electric),transparent); opacity:.6; }
+.exp-project-name { color:#F9E9FF; }
+.exp-text { color:var(--ink-70); line-height:1.82; }
+.exp-result { color:#FFD3E3; }
+.exp-tag, .work-tag { color:var(--ink-70); }
+
+.work-card { background:linear-gradient(120deg, rgba(39,17,51,.78), rgba(47,18,52,.45)); border-color:rgba(255,204,228,.14); }
+.work-card::before { content:"CASE STUDY"; position:absolute; top:25px; left:25px; z-index:2; color:rgba(240,247,255,.7); font-size:9px; letter-spacing:.15em; font-weight:700; padding:5px 8px; background:rgba(6,8,19,.42); border:1px solid rgba(255,255,255,.12); border-radius:999px; backdrop-filter:blur(10px); }
+.work-image-wrap { flex-basis: 345px; border-color:rgba(217,228,255,.13); }
+.work-title { font-size:23px; }
+.work-desc { color:var(--ink-70); line-height:1.78; }
+.work-stat { color:var(--ink-48); }
+.work-link.primary { background:linear-gradient(135deg,#B829F5,#FF6B9D 55%,#FF8A5B); color:#fff; }
+
+.edu-card, .edu-detail-block { background:rgba(31,15,43,.62); border-color:var(--line-subtle); }
+.edu-degree { color:var(--electric); background:rgba(255,107,157,.09); }
+.divination-stage { background:linear-gradient(145deg, rgba(49,20,63,.86), rgba(61,19,55,.66)); border-color:rgba(255,207,229,.16); }
+.skills-tab-btn.active, .deck-draw-btn { background:linear-gradient(135deg,#B829F5,#FF6B9D 52%,#FF8A5B); }
+
+@media (max-width: 760px) {
+  body::after { background-size:44px 44px; opacity:.13; }
+  .brand::after { display:none; }
+  .hero { padding:40px 26px 34px; min-height:auto; }
+  .hero-name { font-size:58px; }
+  .hero-role { font-size:17px; }
+  .hero-avatar-wrap { transform:scale(.9); }
+  .about-block { padding:72px 24px 28px; }
+  .about-block::before { writing-mode:horizontal-tb; left:24px; top:24px; }
+  .about-block::after { left:24px; top:44px; right:24px; bottom:auto; width:auto; height:1px; }
+  .resume-download { padding:44px 24px 26px; }
+  .resume-download::before { left:24px; }
+  .work-card::before { left:18px; top:18px; }
+}
+
+/* Hero 右侧视觉：恢复气泡动效 + 拼贴装饰环，隐藏轨道系统保持整洁 */
+.orbit-system { display: none; }
+
+.hero-avatar-wrap {
+  width: 292px;
+  height: 310px;
+  transform: scale(1.08) translateY(2px);
+}
+
+/* 柔光光晕 —— 温酒暖色 */
+.hero-avatar-wrap .shape-glow {
+  display: block;
+  width: 280px;
+  height: 280px;
+  top: 8px;
+  left: 6px;
+  opacity: .85;
+  background: radial-gradient(circle at 45% 38%, rgba(184,41,245,.32), rgba(255,107,157,.18) 42%, transparent 72%);
+  filter: blur(20px);
+}
+
+/* 渐变背景球 —— 霓虹紫粉 */
+.hero-avatar-wrap .shape-blob {
+  display: block;
+  width: 224px;
+  height: 224px;
+  top: 38px;
+  left: 34px;
+  border-radius: 50%;
+  opacity: .96;
+  background: linear-gradient(145deg, #B829F5 0%, #d358bd 42%, #FF6B9D 100%);
+  box-shadow: inset 0 -14px 28px rgba(54,18,88,.22), inset 0 6px 16px rgba(255,255,255,.18), 0 18px 48px rgba(184,41,245,.35);
+  animation: blobMorph 10s ease-in-out infinite;
+}
+
+/* 拼贴虚线环 —— 恢复并用温酒色 */
+.hero-avatar-wrap .shape-ring {
+  display: block;
+  width: 226px;
+  height: 226px;
+  border: 1.5px dashed rgba(184,41,245,.45);
+  animation: floatBubble 8s ease-in-out infinite;
+}
+.hero-avatar-wrap .shape-ring-inner {
+  display: block;
+  width: 256px;
+  height: 256px;
+  border: 1px solid rgba(255,107,157,.25);
+  animation: floatBubble 12s ease-in-out infinite reverse;
+}
+
+/* 拼贴小方块 */
+.hero-avatar-wrap .shape-square {
+  display: block;
+  background: linear-gradient(135deg, #FF6B9D, #B829F5);
+  box-shadow: 0 6px 16px rgba(184,41,245,.35);
+}
+
+/* 气泡动效 —— 恢复并用温酒多巴胺色 */
+.hero-avatar-wrap .bubble {
+  display: block;
+  background: linear-gradient(135deg, rgba(184,41,245,.65), rgba(255,107,157,.25));
+  box-shadow: 0 0 18px rgba(184,41,245,.35);
+}
+.hero-avatar-wrap .bubble-ring {
+  background: transparent;
+  border-color: rgba(255,107,157,.55);
+  box-shadow: 0 0 12px rgba(255,107,157,.2);
+}
+
+.hero-avatar-cutout-wrap {
+  bottom: 13px;
+  width: 250px;
+  height: 224px;
+}
+
+.hero-avatar-cutout {
+  width: 250px;
+  top: 0;
+  filter: drop-shadow(0 12px 20px rgba(42,0,83,.4));
+}
+
+.hero-visual-label {
+  right: 38px;
+  bottom: 30px;
+  background: rgba(10, 12, 26, .62);
+}
+
+/* 技能抽卡仪式感：大尺寸牌堆、环境光和抽洗牌动效 */
+.divination-stage {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 18% 65%, rgba(184,41,245,.22), transparent 28%),
+    radial-gradient(circle at 82% 82%, rgba(255,107,53,.16), transparent 34%),
+    linear-gradient(145deg, rgba(49,20,63,.88), rgba(61,19,55,.68));
+}
+.divination-stage::after {
+  content: "";
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  left: -104px;
+  bottom: -178px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,107,157,.28), transparent 66%);
+  filter: blur(18px);
+  animation: deckAura 6s ease-in-out infinite;
+}
+.deck-area { min-height: 270px; gap: 34px; align-items: center; }
+.deck-pile {
+  width: 166px;
+  height: 236px;
+  margin: 8px 10px 10px 8px;
+  cursor: pointer;
+  filter: drop-shadow(0 18px 23px rgba(0,0,0,.35));
+}
+.deck-pile::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 28px;
+  background: radial-gradient(circle, rgba(184,41,245,.30), transparent 68%);
+  filter: blur(12px);
+  animation: deckAura 4s ease-in-out infinite;
+}
+.deck-pile .deck-card {
+  border-radius: 18px;
+  border-color: rgba(255,174,207,.46);
+  background:
+    repeating-linear-gradient(45deg, rgba(255,138,173,.17) 0 10px, rgba(184,41,245,.10) 10px 20px),
+    linear-gradient(160deg, #331B4A, #181126);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 10px 22px rgba(0,0,0,.32);
+  font-size: 34px;
+  color: rgba(255,224,102,.82);
+  transition: transform .34s cubic-bezier(.16,1,.3,1), box-shadow .34s ease;
+}
+.deck-pile .deck-card:nth-child(1) { transform: translate(0, 0) rotate(0deg); }
+.deck-pile .deck-card:nth-child(2) { transform: translate(6px, -7px) rotate(-3deg); }
+.deck-pile .deck-card:nth-child(3) { transform: translate(-6px, -14px) rotate(3deg); }
+.deck-pile:hover .deck-card:nth-child(1) { transform: translate(2px, 0) rotate(2deg); }
+.deck-pile:hover .deck-card:nth-child(2) { transform: translate(12px, -11px) rotate(-5deg); }
+.deck-pile:hover .deck-card:nth-child(3) { transform: translate(-12px, -21px) rotate(5deg); }
+.deck-pile.is-drawing .deck-card:nth-child(1) { animation: drawFromDeck .52s cubic-bezier(.16,1,.3,1) both; }
+.deck-pile.is-drawing .deck-card:nth-child(2),
+.deck-pile.is-drawing .deck-card:nth-child(3) { animation: pilePulse .52s ease both; }
+.deck-pile.is-shuffling .deck-card:nth-child(1) { animation: shuffleOne .76s cubic-bezier(.4,0,.2,1) both; }
+.deck-pile.is-shuffling .deck-card:nth-child(2) { animation: shuffleTwo .76s cubic-bezier(.4,0,.2,1) both; }
+.deck-pile.is-shuffling .deck-card:nth-child(3) { animation: shuffleThree .76s cubic-bezier(.4,0,.2,1) both; }
+.deck-actions { gap: 13px; }
+.deck-draw-btn { min-width: 174px; padding: 16px 32px; font-size: 16px; box-shadow: 0 12px 30px rgba(184,41,245,.35); }
+.deck-reset-btn { border-color: rgba(255,184,215,.32); background: rgba(255,255,255,.035); }
+.deck-reset-btn:disabled { opacity: .45; cursor: wait; }
+.flip-card.drawn-in { animation: cardReveal .72s cubic-bezier(.16,1,.3,1) both; }
+@keyframes deckAura { 0%,100% { transform: scale(.94); opacity:.5; } 50% { transform: scale(1.08); opacity:1; } }
+@keyframes drawFromDeck { 0% { transform: translate(0,0) rotate(0); opacity:1; } 60% { transform: translate(78px,-36px) rotate(10deg) scale(1.06); opacity:1; } 100% { transform: translate(150px,-18px) rotate(15deg) scale(.88); opacity:0; } }
+@keyframes pilePulse { 50% { transform: translateY(7px) scale(.96); } }
+@keyframes shuffleOne { 0%,100% { transform:translate(0,0) rotate(0); } 35% { transform:translate(55px,-20px) rotate(11deg); } 70% { transform:translate(-40px,6px) rotate(-8deg); } }
+@keyframes shuffleTwo { 0%,100% { transform:translate(6px,-7px) rotate(-3deg); } 35% { transform:translate(-52px,-26px) rotate(-13deg); } 70% { transform:translate(47px,8px) rotate(7deg); } }
+@keyframes shuffleThree { 0%,100% { transform:translate(-6px,-14px) rotate(3deg); } 35% { transform:translate(42px,-38px) rotate(14deg); } 70% { transform:translate(-49px,-3px) rotate(-10deg); } }
+@keyframes cardReveal { from { opacity:0; transform:translate3d(46px,-34px,0) rotate(8deg) scale(.82); } to { opacity:1; transform:translate3d(0,0,0) rotate(0) scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .divination-stage::after, .deck-pile::before, .deck-pile.is-drawing .deck-card, .deck-pile.is-shuffling .deck-card, .flip-card.drawn-in { animation: none; }
+}
+
+@media (max-width: 760px) {
+  .hero-avatar-wrap { transform: scale(.86); margin:-14px 0 -34px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="brand"><span class="brand-dot"></span>任悦平</div>
+  <div class="nav-tabs" id="navTabs">
+    <div class="nav-tab active" data-page="home">主页</div>
+    <div class="nav-tab" data-page="experience">实习经历</div>
+    <div class="nav-tab" data-page="works">Vibe Coding 作品</div>
+    <div class="nav-tab" data-page="education">教育背景</div>
+    <div class="nav-tab" data-page="skills">技能爱好</div>
+  </div>
+  <button class="nav-cta" id="downloadResumeBtn">下载简历</button>
+</nav>
+
+<!-- ============ 主页 ============ -->
+<section class="page active" id="page-home">
+  <div class="hero">
+    <div class="orbit-system" aria-hidden="true">
+      <span class="orbit"></span>
+      <span class="orbit orbit--inner"></span>
+      <span class="orbit orbit--tilt"></span>
+      <span class="planet planet--main"></span>
+      <span class="planet planet--mini"></span>
+      <span class="crystal"></span>
+      <span class="spark spark--one">✦</span>
+      <span class="spark spark--two">✧</span>
+    </div>
+    <span class="hero-visual-label">PRODUCT · AI · VIBE</span>
+    <div class="hero-left">
+      <p class="hero-greeting">你好，我是 👋</p>
+      <h1 class="hero-name">任悦平</h1>
+      <p class="hero-role">产品经理 ｜ 27 届秋招</p>
+      <div class="hero-tags">
+        <span class="hero-tag">B端商业产品</span>
+        <span class="hero-tag">AI 数据工具</span>
+        <span class="hero-tag">Vibe Coding</span>
+        <span class="hero-tag">硕士在读</span>
+      </div>
+      <div class="hero-contacts">
+        <span>📍 江浙沪｜北京｜深圳</span>
+        <span>💬 18244650119</span>
+        <span>✉️ 851207269@qq.com</span>
+      </div>
+    </div>
+<div class="hero-avatar-wrap">
+<span class="avatar-collage-shape shape-glow"></span>
+<span class="avatar-collage-shape shape-ring-inner"></span>
+<span class="avatar-collage-shape shape-ring"></span>
+<span class="avatar-collage-shape shape-blob"></span>
+<span class="avatar-collage-shape shape-square"></span>
+<div class="hero-avatar-cutout-wrap">
+<div class="hero-avatar-cutout-inner">
+<img class="hero-avatar-cutout" src="assets/avatar-cutout.png" alt="任悦平" onerror="this.closest('.hero-avatar-cutout-wrap').style.display='none'; this.closest('.hero-avatar-wrap').querySelector('.hero-avatar-fallback').style.display='block';" />
+</div>
+</div>
+<img class="hero-avatar-fallback" style="display:none;" src="assets/avatar.jpg" alt="任悦平" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22180%22 height=%22180%22><rect width=%22180%22 height=%22180%22 fill=%22%23262a35%22/><text x=%2250%25%22 y=%2255%25%22 font-size=%2260%22 fill=%22%23ff7a00%22 text-anchor=%22middle%22 font-family=%22sans-serif%22>任</text></svg>'" />
+<span class="bubble bubble6 bubble-ring"></span>
+<span class="bubble bubble1"></span>
+<span class="bubble bubble2"></span>
+      <span class="bubble bubble3"></span>
+      <span class="bubble bubble4"></span>
+      <span class="bubble bubble5"></span>
+    </div>
+  </div>
+
+  <div class="highlight-grid">
+    <div class="highlight-card">
+      <p class="highlight-num">3 段</p>
+      <p class="highlight-label">大厂产品实习经历（美团 / 星环科技 / Bilibili）</p>
+    </div>
+    <div class="highlight-card">
+      <p class="highlight-num">1100 万</p>
+      <p class="highlight-label">写评返券项目预计月引入商家促评预算（元）</p>
+    </div>
+    <div class="highlight-card clickable" onclick="document.querySelector('.nav-tab[data-page=works]').click(); window.scrollTo(0,0);">
+      <p class="highlight-num">5 个</p>
+      <p class="highlight-label">Vibe Coding 作品，含 3 个大众点评真实工作交付项目</p>
+      <span class="highlight-cta">查看作品集 <span class="arrow">→</span></span>
+    </div>
+  </div>
+
+  <div class="about-block">
+    <h3 class="about-title"><span class="dot"></span>关于我</h3>
+    <p class="about-text">华东师范大学在读硕士，具备互联网产品全链路实践经验。有大众点评 B 端商业产品、AI 数据工具、C 端创新体验三类产品实习经历，擅长从用户洞察到方案落地的端到端推进，也擅长跨团队协同把复杂需求落成可执行的系统规则。同时具备扎实的 Vibe Coding 实践能力，曾独立用 AI 编程工具从零构建过完整的全栈个人管理平台，相信 AI 时代产品经理的核心竞争力是"想清楚问题、讲清楚需求"，技术实现可以交给 AI 完成。</p>
+  </div>
+
+  <div class="resume-download" id="resumeDownloadAnchor">
+    <div class="resume-download-left">
+      <h3>需要更详细的简历？</h3>
+      <p>可直接下载 PDF 版本简历，或查看完整实习项目与作品详情</p>
+    </div>
+    <div class="resume-btn-group">
+      <a class="btn btn-primary" href="assets/任悦平-27届产品-研究生.pdf" download>📄 下载简历 PDF</a>
+      <span class="btn btn-ghost" onclick="document.querySelector('.nav-tab[data-page=experience]').click(); window.scrollTo(0,0);">查看实习经历 →</span>
+      <span class="btn btn-ghost" onclick="document.querySelector('.nav-tab[data-page=works]').click(); window.scrollTo(0,0);">🤖 查看 Vibe Coding 作品 →</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 实习经历 ============ -->
+<section class="page" id="page-experience">
+  <span class="section-label">💼 EXPERIENCE</span>
+  <h2 class="page-title">实习经历</h2>
+  <p class="page-desc">三段产品实习经历，覆盖 B 端商业产品、AI 数据工具、C 端创新体验三个方向，完整呈现从用户洞察到方案落地的产品能力。</p>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div class="timeline-company-header">
+        <span class="timeline-company">美团</span>
+        <span class="timeline-role">｜商家产品经理实习</span>
+      </div>
+      <p class="timeline-time">2026.3 - 至今</p>
+
+      <div class="exp-project">
+        <div class="exp-project-title">
+          <span class="exp-project-name">项目一：写评返券 MVP（大众点评 · B端商业产品）</span>
+          <span class="exp-project-time">2026.5</span>
+        </div>
+        <span class="exp-label">作品介绍</span>
+        <p class="exp-text">面向平台 600 万餐饮商户中近 2/3 月度零评价的中小商家，通过"商户出资—平台制券—用户离店写评返无门槛券"的机制，在合规前提下验证离店场景对评价供给的拉动效率。</p>
+        <span class="exp-label">核心功能</span>
+        <p class="exp-text"><strong>B 端活动创建页</strong>——独立负责字段结构、校验逻辑与支付转化路径设计，将"商家想投促评"翻译为"系统可执行的任务与预算"：基于商家规模分层预置 200/500/1000 张三档发券量与 10/15/20 元梯度面额，联动字数门槛（15 字→10 元，30 字→15 元）实现"高质量评价→更高奖励"的正循环；设计门店准入、时间约束、预算上限、协议强制阅读、支付二次确认等 6 条校验规则守住合规与风控边界；协调海螺合同、金融服务、结算平台、NEXT 制券、权益发券、风控平台等 7 个系统，以"复用既有能力、新增最少必要接口"策略跑通资金链路。</p>
+        <div class="exp-result"><strong>项目成果：</strong>MVP 上线两个月未主动运营即覆盖 43 城市 102 家门店，商家充值超 10 万元，高质量评价占比 39%，活动评价贡献占门店总产评 16%。</div>
+        <div class="exp-tags">
+          <span class="exp-tag">B端商业化</span>
+          <span class="exp-tag">跨系统协同</span>
+          <span class="exp-tag">风控设计</span>
+        </div>
+      </div>
+
+      <div class="exp-project">
+        <div class="exp-project-title">
+          <span class="exp-project-name">项目二：打卡有礼 · 实体物料申领风险管理优化（大众点评）</span>
+          <span class="exp-project-time">2026.3</span>
+        </div>
+        <span class="exp-label">作品介绍</span>
+        <p class="exp-text">面向使用"打卡有礼"自营销工具的多门店商家，解决物料下单流程中退款提醒缺失、数量提示歧义、协议签署空白、订单号不统一四个风控体验缺陷导致的平台资损与客诉问题。</p>
+        <span class="exp-label">核心功能</span>
+        <p class="exp-text"><strong>物料下单全链路风控优化</strong>——从事故复盘出发拆解出四个核心问题并逐一产品化解决：在支付关键节点前置免费取消时效强提示弹窗，消除商家"不知情支付"导致的退款纠纷；重构物料数量提示信息架构，将单门店申领量与支付确认栏总量提示分离呈现，消除"单店量当总量"的歧义误操作；新增《付费物料申领协议》强制勾选环节，为平台处置退款纠纷提供法律依据；推动后台订单号映射统一（商家端/运营后台/供应商侧），将商家咨询时的工单定位效率从"需额外映射查询"提升为"一号通查"。</p>
+        <div class="exp-result"><strong>项目成果：</strong>项目已上线，从根本上降低平台资损与法律风险。</div>
+        <div class="exp-tags">
+          <span class="exp-tag">风险治理</span>
+          <span class="exp-tag">信息架构</span>
+          <span class="exp-tag">复盘分析</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div class="timeline-company-header">
+        <span class="timeline-company">星环科技</span>
+        <span class="timeline-role">｜人工智能产品实习</span>
+      </div>
+      <p class="timeline-time">2025.3 - 2025.9</p>
+
+      <div class="exp-project">
+        <div class="exp-project-title">
+          <span class="exp-project-name">项目三：语料开发工具 · 异常标注面板（AI 数据平台）</span>
+        </div>
+        <span class="exp-label">作品介绍</span>
+        <p class="exp-text">面向 AI 数据平台运营人员与算法工程师，解决语料质量评分卡上线后"只看到分数、无法定位异常原因"的断层问题，将单条语料标注耗时从 32 秒降至 9 秒，为整体语料处理效率贡献约 30% 增益。</p>
+        <span class="exp-label">核心功能</span>
+        <p class="exp-text"><strong>异常标注面板</strong>——独立负责从需求拆解到 PRD 与 Figma 高保真交互的端到端交付：设计"穷尽且互斥"的 6 类异常分类体系（乱码/截断/重复/无意义/逻辑断裂/其他），与算法团队的特征维度对齐使标注数据可直接指导数据清洗策略；设计数字键 1-6 一键标注 + Enter 提交的快捷键交互，经 3 名运营 600 条语料测试验证为耗时下降的主要贡献因素；实现低分优先的标注队列管理、JSON/CSV 双格式导出对接算法管线、5% 校验语料插入的质量保障机制。通过 Kappa 系数衡量标注一致性（目标≥0.75），以"感知问题→定位问题"填补数据治理闭环中缺失的关键环节。</p>
+        <div class="exp-result"><strong>项目成果：</strong>单条标注耗时从 32s 降至 9s，标注面板为整体语料处理效率贡献约 30% 增益。</div>
+        <div class="exp-tags">
+          <span class="exp-tag">AI 数据工具</span>
+          <span class="exp-tag">交互设计</span>
+          <span class="exp-tag">数据治理</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div class="timeline-company-header">
+        <span class="timeline-company">Bilibili</span>
+        <span class="timeline-role">｜产品实习</span>
+      </div>
+      <p class="timeline-time">2024.1 - 2024.5</p>
+
+      <div class="exp-project">
+        <div class="exp-project-title">
+          <span class="exp-project-name">项目四：CubeFace 智能手表（C端创新产品）</span>
+        </div>
+        <span class="exp-label">作品介绍</span>
+        <p class="exp-text">面向 18-28 岁、日均 B站使用超 60 分钟且拥有智能手表的重度社区用户，解决手表端弹幕不可读、互动为零、品牌视觉缺失三大体验断层，在 1.5 英寸 OLED 屏幕上重建 B站社区陪伴感。</p>
+        <span class="exp-label">核心功能</span>
+        <p class="exp-text"><strong>「耳机弹幕」语音互动功能</strong>——主导弹幕数据分析、视觉语言定义与核心功能设计全流程：基于 10,000+ 条弹幕采样分析发现小屏场景用户弹幕消费行为从"逐条阅读"变为"情绪感知"，据此设计弹幕密度控制（同屏≤3 条）、关键词智能截取（>8 字保留情绪词）、低功耗 GPU 渲染（15fps，功耗占比≤5%）三层优化方案；首创"耳机弹幕"功能，通过音频空隙检测在视频原声间隙插入 TTS 弹幕播报，实现不看屏幕也能感受社区氛围的原生手表交互；定义"绿+粉"品牌视觉系统适配 OLED 高对比度特性，输出 Figma 组件库支持后续复用。</p>
+        <div class="exp-result"><strong>项目成果：</strong>上线首周日活用户中 25% 使用了相关功能。</div>
+        <div class="exp-tags">
+          <span class="exp-tag">C端创新</span>
+          <span class="exp-tag">用户洞察</span>
+          <span class="exp-tag">硬件体验设计</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ Vibe Coding 作品 ============ -->
+<section class="page" id="page-works">
+  <span class="section-label">🤖 VIBE CODING</span>
+  <h2 class="page-title">Vibe Coding 作品集</h2>
+  <p class="page-desc">不会写代码的产品经理，用自然语言驱动 AI Coding 工具完成从需求到工程化实现的完整闭环。以下分为「实习期间真实工作交付」与「个人项目实践」两类，全程零框架经验，纯自然语言对话驱动生成与迭代。</p>
+
+  <div class="work-group-title">
+    <span class="wgt-badge">实习真实交付</span>
+    <span>大众点评实习期间的真实需求项目</span>
+  </div>
+  <p class="work-group-desc">以下三个案例均为大众点评实习期间承接的真实工作需求，独立完成方案设计、页面开发到灰度上线的完整链路。</p>
+
+  <div class="work-card">
+    <div class="work-image-wrap">
+      <div class="work-image-cover" style="background: linear-gradient(135deg, #0A1628 0%, #0D2147 60%, #1A3A6B 100%);">
+        <span class="wic-icon">⚡</span>
+        <span class="wic-num">80%+</span>
+        <span class="wic-label">端到端交付效率提升</span>
+      </div>
+    </div>
+    <div class="work-content">
+      <span class="work-badge">端到端页面交付</span>
+      <h3 class="work-title">Lv 规则页端到端交付 · 产品视角实践</h3>
+      <p class="work-desc">大众点评会员 Lv 规则页面的真实需求交付项目，独立完成从原型设计、前端页面开发到联调上线的完整链路。传统模式下需要产品出原型、UI 出视觉、前端排期开发，全程涉及多角色协作；这次全程用 AI Coding 工具自己把页面写出来，把"提需求"变成"直接交付可用页面"。</p>
+      <div class="work-stats">
+        <div class="work-stat"><strong>端到端</strong>需求→页面→上线全链路</div>
+        <div class="work-stat"><strong>零排期</strong>等待前端资源</div>
+        <div class="work-stat"><strong>多轮</strong>产品视角自主调优</div>
+      </div>
+      <p class="work-desc">核心亮点：把原本需要跨角色协作、多轮排期沟通的页面交付，压缩成一人独立完成的高效流程；过程中反复用产品视角检验 AI 生成结果（视觉还原度、交互细节、边界情况），并通过精细化的对话调优逐步逼近可上线标准。</p>
+      <div class="work-tags">
+        <span class="work-tag">Vibe Coding</span>
+        <span class="work-tag">端到端交付</span>
+        <span class="work-tag">前端工程化</span>
+        <span class="work-tag">产品自主验证</span>
+      </div>
+      <div class="work-links">
+        <a class="work-link primary" href="assets/works/lvrule-practice.html" target="_blank">🔗 查看完整案例</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="work-card reverse">
+    <div class="work-image-wrap">
+      <div class="work-image-cover" style="background: linear-gradient(135deg, #4C1D95 0%, #6B3FA0 45%, #9B59B6 100%);">
+        <span class="wic-icon">🎨</span>
+        <span class="wic-num">VIP→橙V</span>
+        <span class="wic-label">品牌升级全程复盘</span>
+      </div>
+    </div>
+    <div class="work-content">
+      <span class="work-badge">品牌升级项目</span>
+      <h3 class="work-title">VIP → 橙V 品牌升级全程复盘</h3>
+      <p class="work-desc">大众点评会员体系从「VIP」到「橙V」的品牌焕新项目复盘，覆盖命名逻辑、视觉规范、页面改版、多端灰度发布的完整过程。用 Vibe Coding 独立搭建了可交互的复盘展示页，把跨团队协作的品牌升级项目转化为结构化、可视化的案例叙事，包括改造前后对比、发布节奏表与关键决策记录。</p>
+      <div class="work-stats">
+        <div class="work-stat"><strong>多阶段</strong>命名/视觉/页面/发布</div>
+        <div class="work-stat"><strong>多端灰度</strong>发布节奏管理</div>
+        <div class="work-stat"><strong>结构化复盘</strong>决策留痕</div>
+      </div>
+      <p class="work-desc">用 AI Coding 工具把品牌升级这种跨部门、长周期的项目讲清楚——通过时间轴、前后对比、发布表格等可视化模块，让评审者快速理解一个品牌焕新项目从决策到落地的全过程，也是"用 AI 做复盘 Demo 提升沟通效率"的又一次实践。</p>
+      <div class="work-tags">
+        <span class="work-tag">品牌升级</span>
+        <span class="work-tag">项目复盘</span>
+        <span class="work-tag">Vibe Coding</span>
+      </div>
+      <div class="work-links">
+        <a class="work-link primary" href="assets/works/vip-to-orangev.html" target="_blank">🔗 查看完整案例</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-image-wrap">
+      <div class="work-image-cover" style="background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 50%, #0e6655 100%);">
+        <span class="wic-icon">🧩</span>
+        <span class="wic-num">VIP 权益弹窗</span>
+        <span class="wic-label">需求交付全过程</span>
+      </div>
+    </div>
+    <div class="work-content">
+      <span class="work-badge">需求交付实践</span>
+      <h3 class="work-title">VIP 权益弹窗需求交付（产品视角）</h3>
+      <p class="work-desc">VIP 权益弹窗的真实需求交付案例，完整记录从需求背景、方案设计、Prompt 迭代到最终页面效果的产品视角实践过程。页面呈现了多轮"对话调优"细节——展示了从初版效果到最终效果之间，如何用精准的产品语言持续修正 AI 生成结果，逐步收敛到符合业务预期的交付标准。</p>
+      <div class="work-stats">
+        <div class="work-stat"><strong>多轮迭代</strong>Prompt 与效果对比</div>
+        <div class="work-stat"><strong>全流程留痕</strong>需求→方案→交付</div>
+        <div class="work-stat"><strong>产品视角</strong>把关每一版细节</div>
+      </div>
+      <p class="work-desc">核心亮点：完整还原了与 AI Coding 工具的真实对话过程，包括最初版本的问题诊断、每一轮调优的产品判断依据，以及最终交付版本的效果呈现，直观展示"产品经理如何用自然语言驱动出高质量交付物"这一能力闭环。</p>
+      <div class="work-tags">
+        <span class="work-tag">需求交付</span>
+        <span class="work-tag">Prompt 迭代</span>
+        <span class="work-tag">Vibe Coding</span>
+      </div>
+      <div class="work-links">
+        <a class="work-link primary" href="assets/works/vip-benefit-modal.html" target="_blank">🔗 查看完整案例</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="work-group-title">
+    <span class="wgt-badge">个人项目</span>
+    <span>课余时间自主发起的全栈实践</span>
+  </div>
+  <p class="work-group-desc">以下两个作品为个人课余时间的自主项目，同样零框架经验，全程与 Coding Agent 对话生成。</p>
+
+  <div class="work-card">
+    <div class="work-image-wrap">
+      <img src="assets/work-yaya.png" alt="歪歪个人管理平台" />
+    </div>
+    <div class="work-content">
+      <span class="work-badge">全栈个人效率系统</span>
+      <h3 class="work-title">歪歪个人管理平台（内部代号「废物利用中心」）</h3>
+      <p class="work-desc">用 AI 编程工具从 0 到 1 构建的全栈个人管理平台，8 大模块覆盖求职、毕设、学习全场景。作为 27 届研究生，我把散落在简历、飞书、备忘录、滴答清单里的信息整合进一个统一系统，全程零代码基础、纯自然语言对话驱动 Claude Code / DeepSeek / CatPaw 完成生成与迭代。</p>
+      <div class="work-stats">
+        <div class="work-stat"><strong>8800 行</strong>单文件前端代码</div>
+        <div class="work-stat"><strong>8 大模块</strong>战况看板/校招/毕设/任务等</div>
+        <div class="work-stat"><strong>100% 本地</strong>数据自主可控</div>
+      </div>
+      <p class="work-desc">核心亮点：校招模块内置智能策略告警（S级公司未投提醒、响应率过低提醒等 6 种场景）；任务模块支持中文日期自动解析（"下周三"自动识别为截止日期）；数据采用 localStorage + 磁盘文件双写，配额溢出时有三级自救降级策略。零依赖、零构建，双击即可运行，通过 Node.js 原生服务实现 macOS Finder 深度集成。</p>
+      <div class="work-tags">
+        <span class="work-tag">Vibe Coding</span>
+        <span class="work-tag">全栈开发</span>
+        <span class="work-tag">Claude Code</span>
+        <span class="work-tag">产品自我验证</span>
+      </div>
+      <div class="work-links">
+        <a class="work-link primary" href="assets/works/yaya-demo.html" target="_blank">🔗 查看演示版</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="work-card reverse">
+    <div class="work-image-wrap">
+      <img src="assets/work-xiepingfanquan.png" alt="写评返券 MVP 交互原型" />
+    </div>
+    <div class="work-content">
+      <span class="work-badge">B端商业产品原型</span>
+      <h3 class="work-title">写评返券 MVP · 交互原型与案例复盘页</h3>
+      <p class="work-desc">美团大众点评写评返券项目的可交互原型与案例复盘页面，同样通过 Vibe Coding 一次性生成。页面完整呈现了从"抖音评价有礼"竞品调研到 MVP 方案设计的全过程，包括项目背景、核心问题、设计方案、校验规则、风控机制与最终结果的结构化叙事。</p>
+      <div class="work-stats">
+        <div class="work-stat"><strong>102 家</strong>MVP 上线覆盖门店</div>
+        <div class="work-stat"><strong>43 城市</strong>覆盖范围</div>
+        <div class="work-stat"><strong>39%</strong>高质量评价占比</div>
+      </div>
+      <p class="work-desc">用 Vibe Coding 把面试讲稿和产品方案转化为一份可交互、可视化的案例展示页，让评审者五分钟内看懂"问题—方案—结果"的完整逻辑，替代传统的 PPT 讲述方式，也是"用 AI 做 Demo 加速产品沟通"理念的直接实践。</p>
+      <div class="work-tags">
+        <span class="work-tag">B端产品设计</span>
+        <span class="work-tag">案例可视化</span>
+        <span class="work-tag">Vibe Coding</span>
+      </div>
+      <div class="work-links">
+        <a class="work-link primary" href="assets/works/xiepingfanquan-mvp.html" target="_blank">🔗 查看完整案例</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 教育背景 ============ -->
+<section class="page" id="page-education">
+  <span class="section-label">🎓 EDUCATION</span>
+  <h2 class="page-title">教育背景</h2>
+  <p class="page-desc">设计・科学与艺术方向，硕士在读，主修课程覆盖数据分析、用户研究、交互设计与商业模式设计。</p>
+
+  <div class="edu-card">
+    <div class="edu-card-header">
+      <span class="edu-school">华东师范大学</span>
+      <span class="edu-time">2024.09 - 2027.06</span>
+    </div>
+    <span class="edu-degree">硕士 · 设计・科学与艺术方向</span>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-card-header">
+      <span class="edu-school">华东师范大学</span>
+      <span class="edu-time">2020.09 - 2024.06</span>
+    </div>
+    <span class="edu-degree">本科</span>
+  </div>
+
+  <div class="edu-detail-block">
+    <p class="edu-detail-title">主修课程</p>
+    <p class="edu-detail-text">数据分析与可视化、用户研究与行为分析、交互设计基础、服务设计实践、商业模式设计、市场调研、产品设计原理</p>
+  </div>
+
+  <div class="edu-detail-block">
+    <p class="edu-detail-title">核心荣誉</p>
+    <div class="honor-list">
+      <div class="honor-item">
+        <span class="honor-year">2022</span>
+        <span>华东师范大学优秀学生</span>
+      </div>
+      <div class="honor-item">
+        <span class="honor-year">2021</span>
+        <span>国家励志奖学金</span>
+      </div>
+      <div class="honor-item">
+        <span class="honor-year">2024.02</span>
+        <span>全民数字素养与人工智能创新应用大赛 一等奖</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- ============ 技能爱好抽卡 ============ -->
+      <section class="page" id="page-skills">
+        <span class="section-label">🎴 SKILLS & HOBBIES</span>
+        <h2 class="page-title">技能 & 爱好</h2>
+        <p class="page-desc">洗好牌了，抽一张试试？点击「抽卡」揭晓一张关于我的技能或爱好牌，抽完的牌会翻面显示详情。</p>
+
+        <div class="divination-stage">
+          <div class="skills-tabs">
+            <button class="skills-tab-btn active" data-group="skill">💼 技能牌组</button>
+            <button class="skills-tab-btn" data-group="hobby">🎨 爱好牌组</button>
+          </div>
+
+          <p class="card-hint" id="skillsCardHint">✦ 静心片刻，点击「抽一张牌」揭晓今日技能；抽完后点卡片翻面查看详情</p>
+          <p class="divination-counter" id="skillsCounter">牌堆剩余 6 / 6 张</p>
+
+          <div id="skillGroup" data-group-panel="skill">
+            <div class="deck-area" id="skillDeckArea">
+              <div class="deck-pile" id="skillDeckPile">
+                <div class="deck-card">🔮</div>
+                <div class="deck-card">🔮</div>
+                <div class="deck-card">🔮</div>
+              </div>
+              <div class="deck-actions">
+                <button class="deck-draw-btn" data-draw="skill">✨ 抽一张牌</button>
+                <button class="deck-reset-btn" data-reset="skill">🔄 重新洗牌</button>
+              </div>
+            </div>
+            <div class="card-grid" id="skillDrawnGrid"></div>
+          </div>
+
+          <div id="hobbyGroup" data-group-panel="hobby" style="display: none;">
+            <div class="deck-area" id="hobbyDeckArea">
+              <div class="deck-pile" id="hobbyDeckPile">
+                <div class="deck-card">🔮</div>
+                <div class="deck-card">🔮</div>
+                <div class="deck-card">🔮</div>
+              </div>
+              <div class="deck-actions">
+                <button class="deck-draw-btn" data-draw="hobby">✨ 抽一张牌</button>
+                <button class="deck-reset-btn" data-reset="hobby">🔄 重新洗牌</button>
+              </div>
+            </div>
+            <div class="card-grid" id="hobbyDrawnGrid"></div>
+          </div>
+        </div>
+
+        <!-- 卡牌数据（保留原始 DOM 数据源，供 JS 读取后隐藏） -->
+        <div id="skillCardData" style="display: none;">
+          <div class="flip-card" data-front-icon="🎯" data-front-name="产品能力" data-back-title="产品能力" data-back-desc="快速理解业务，熟悉需求分析、流程设计、PRD 输出、产品迭代，能够市场调研、需求拆解、竞品分析与功能方案设计。"></div>
+          <div class="flip-card" data-front-icon="🎨" data-front-name="原型工具" data-back-title="原型工具" data-back-desc="熟练使用 Figma、Sketch、墨刀（MG）进行原型设计，使用 XMind 等梳理产品结构与业务流程。"></div>
+          <div class="flip-card" data-front-icon="📊" data-front-name="数据分析" data-back-title="数据分析" data-back-desc="掌握基础 SQL 数据处理与统计分析，指标与埋点设计，具备数据辅助决策能力。"></div>
+          <div class="flip-card" data-front-icon="🤖" data-front-name="AI 应用" data-back-title="AI 应用" data-back-desc="熟练使用 Claude Code、ChatGPT、DeepSeek、即梦等 AI 工具进行需求分析、方案设计、demo 产出，了解提示词工程、RAG、Agent 概念，具备 Vibe Coding 能力。"></div>
+          <div class="flip-card" data-front-icon="🧩" data-front-name="需求拆解" data-back-title="需求拆解" data-back-desc="擅长把模糊业务诉求转化为可执行的功能方案，覆盖流程设计、异常场景与边界条件校验。"></div>
+          <div class="flip-card" data-front-icon="🤝" data-front-name="跨团队协同" data-back-title="跨团队协同" data-back-desc="有跨支付、权益、风控、法务、研发等多团队协同推进项目落地的实战经验，擅长把复杂利益方拉齐。"></div>
+        </div>
+
+        <div id="hobbyCardData" style="display: none;">
+          <div class="flip-card" data-front-icon="🧠" data-front-name="MBTI" data-back-title="ENTJ · 指挥官" data-back-desc="典型 ENTJ，目标导向、决断力强，喜欢把想法快速拆解成计划并推动落地，也是我做产品和推进跨团队协作的底层性格驱动力。"></div>
+          <div class="flip-card" data-front-icon="🎵" data-front-name="音乐" data-back-title="音乐 · 方大同" data-back-desc="歌单常驻方大同，喜欢他融合 R&amp;B / Neo Soul 的编曲和松弛感，无论是学习、通勤还是复盘项目，都喜欢配上他的歌单。"></div>
+          <div class="flip-card" data-front-icon="🎮" data-front-name="Steam 游戏" data-back-title="Steam · 星露谷物语" data-back-desc="Steam 里最上头的是《星露谷物语》，喜欢经营和规划的乐趣，也享受慢节奏生活模拟带来的解压感。"></div>
+          <div class="flip-card" data-front-icon="📱" data-front-name="手游" data-back-title="手游 · 王者荣耀" data-back-desc="手游主玩《王者荣耀》，喜欢团队配合和临场决策的博弈感，也是和朋友日常联机社交的方式。"></div>
+          <div class="flip-card" data-front-icon="🚴" data-front-name="骑行" data-back-title="骑行" data-back-desc="喜欢周末骑行探索城市角落，享受在路上放空思考的状态。"></div>
+          <div class="flip-card" data-front-icon="🔮" data-front-name="占卜" data-back-title="占卜" data-back-desc="对塔罗、星座等占卜文化感兴趣，喜欢从中获得自我觉察和决策参考的小趣味。"></div>
+        </div>
+      </section>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-tab active" data-page="home">主页</div>
+  <div class="mobile-tab" data-page="experience">实习</div>
+  <div class="mobile-tab" data-page="works">作品</div>
+  <div class="mobile-tab" data-page="education">教育</div>
+  <div class="mobile-tab" data-page="skills">技能</div>
+</div>
+
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.nav-tab, .mobile-tab');
+  var pages = document.querySelectorAll('.page');
+
+  function switchPage(pageId) {
+    pages.forEach(function (p) {
+      p.classList.toggle('active', p.id === 'page-' + pageId);
+    });
+    tabs.forEach(function (t) {
+      t.classList.toggle('active', t.getAttribute('data-page') === pageId);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + pageId);
+    }
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      switchPage(t.getAttribute('data-page'));
+    });
+  });
+
+  var initial = (location.hash || '#home').replace('#', '');
+  if (document.getElementById('page-' + initial)) {
+    switchPage(initial);
+  }
+
+  var downloadBtn = document.getElementById('downloadResumeBtn');
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', function () {
+      switchPage('home');
+      setTimeout(function () {
+        var target = document.getElementById('resumeDownloadAnchor');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 200);
+    });
+  }
+})();
+
+// ============ 技能爱好抽卡 ============
+(function () {
+  function readCardData(containerId) {
+    var container = document.getElementById(containerId);
+    var nodes = container.querySelectorAll('.flip-card');
+    var data = [];
+    nodes.forEach(function (node) {
+      data.push({
+        icon: node.getAttribute('data-front-icon'),
+        name: node.getAttribute('data-front-name'),
+        title: node.getAttribute('data-back-title'),
+        desc: node.getAttribute('data-back-desc')
+      });
+    });
+    return data;
+  }
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function buildDrawnCard(item) {
+    var card = document.createElement('div');
+    card.className = 'flip-card';
+    card.innerHTML =
+      '<div class="flip-card-inner">' +
+        '<div class="flip-card-front">' +
+          '<div class="card-icon">' + item.icon + '</div>' +
+          '<div class="card-name">' + item.name + '</div>' +
+          '<div class="card-tap-hint">点击翻牌 →</div>' +
+        '</div>' +
+        '<div class="flip-card-back">' +
+          '<div class="card-back-title">' + item.title + '</div>' +
+          '<div class="card-back-desc">' + item.desc + '</div>' +
+        '</div>' +
+      '</div>';
+    card.addEventListener('click', function () {
+      card.classList.toggle('flipped');
+    });
+    return card;
+  }
+
+  function createDeck(key, dataContainerId) {
+    var fullData = readCardData(dataContainerId);
+    var state = {
+      key: key,
+      total: fullData.length,
+      remaining: shuffle(fullData),
+      drawnGrid: document.getElementById(key + 'DrawnGrid'),
+      deckArea: document.getElementById(key + 'DeckArea'),
+      deckPile: document.getElementById(key + 'DeckPile'),
+      drawBtn: document.querySelector('[data-draw="' + key + '"]'),
+      resetBtn: document.querySelector('[data-reset="' + key + '"]'),
+      counter: null
+    };
+    return state;
+  }
+
+  var decks = {
+    skill: createDeck('skill', 'skillCardData'),
+    hobby: createDeck('hobby', 'hobbyCardData')
+  };
+
+  var counterEl = document.getElementById('skillsCounter');
+  var hintEl = document.getElementById('skillsCardHint');
+  var activeGroup = 'skill';
+
+  function updateCounter() {
+    var deck = decks[activeGroup];
+    counterEl.textContent = '牌堆剩余 ' + deck.remaining.length + ' / ' + deck.total + ' 张';
+    if (deck.remaining.length === 0) {
+      hintEl.textContent = '✨ 本轮牌组已揭晓，点击「重新洗牌」开启下一次探索吧';
+    } else {
+      hintEl.textContent = '✦ 静心片刻，点击「抽一张牌」揭晓' + (activeGroup === 'skill' ? '技能' : '爱好') + '；抽完后点卡片翻面查看详情';
+    }
+  }
+
+  function renderDeckPile(deck) {
+    var count = deck.remaining.length;
+    deck.deckPile.style.visibility = count > 0 ? 'visible' : 'hidden';
+    deck.drawBtn.disabled = count === 0;
+    deck.drawBtn.textContent = count === 0 ? '🈚 牌组已抽完' : '✨ 抽一张牌';
+  }
+
+  function drawCard(key) {
+    var deck = decks[key];
+    if (deck.remaining.length === 0 || deck.deckPile.classList.contains('is-drawing')) return;
+    var item = deck.remaining.shift();
+    deck.deckPile.classList.add('is-drawing');
+    deck.drawBtn.disabled = true;
+    setTimeout(function () {
+      var card = buildDrawnCard(item);
+      card.classList.add('drawn-in');
+      deck.drawnGrid.appendChild(card);
+      deck.deckPile.classList.remove('is-drawing');
+      renderDeckPile(deck);
+      if (key === activeGroup) updateCounter();
+      setTimeout(function () { card.classList.remove('drawn-in'); }, 760);
+    }, 520);
+  }
+
+  function resetDeck(key, dataContainerId) {
+    var deck = decks[key];
+    if (deck.deckPile.classList.contains('is-shuffling')) return;
+    deck.deckPile.style.visibility = 'visible';
+    deck.deckPile.classList.add('is-shuffling');
+    deck.drawBtn.disabled = true;
+    deck.resetBtn.disabled = true;
+    setTimeout(function () {
+      var fullData = readCardData(dataContainerId);
+      deck.remaining = shuffle(fullData);
+      deck.drawnGrid.innerHTML = '';
+      deck.deckPile.classList.remove('is-shuffling');
+      deck.resetBtn.disabled = false;
+      renderDeckPile(deck);
+      if (key === activeGroup) updateCounter();
+    }, 760);
+  }
+
+  decks.skill.drawBtn.addEventListener('click', function () { drawCard('skill'); });
+  decks.hobby.drawBtn.addEventListener('click', function () { drawCard('hobby'); });
+  decks.skill.resetBtn.addEventListener('click', function () { resetDeck('skill', 'skillCardData'); });
+  decks.hobby.resetBtn.addEventListener('click', function () { resetDeck('hobby', 'hobbyCardData'); });
+
+  renderDeckPile(decks.skill);
+  renderDeckPile(decks.hobby);
+  updateCounter();
+
+  var groupBtns = document.querySelectorAll('.skills-tab-btn');
+  var skillGroup = document.getElementById('skillGroup');
+  var hobbyGroup = document.getElementById('hobbyGroup');
+
+  groupBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      groupBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var group = btn.getAttribute('data-group');
+      activeGroup = group;
+      if (group === 'skill') {
+        skillGroup.style.display = '';
+        hobbyGroup.style.display = 'none';
+      } else {
+        skillGroup.style.display = 'none';
+        hobbyGroup.style.display = '';
+      }
+      updateCounter();
+    });
+  });
+})();
+</script>
+</body>
+</html>

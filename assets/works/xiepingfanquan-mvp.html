@@ -1,0 +1,1203 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>写评返券 · MVP｜项目作品集</title>
+    <meta
+      name="description"
+      content="写评返券 MVP：商户出资，平台制券与发券，用户离店完成评价后获得无门槛券。用于验证离店促评效率并在合规前提下提升评价供给。"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./xiepingfanquan-mvp.css?v=20250702" />
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+
+    <header class="topbar" role="banner">
+      <div class="wrap topbar-inner">
+        <div class="brand" aria-label="页面信息">
+          <div class="brand-title">Portfolio · Case Study</div>
+          <div class="brand-sub">产品经理 · 写评返券（MVP）</div>
+        </div>
+        <nav class="nav" aria-label="页面导航">
+          <a href="#overview">概览</a>
+          <a href="#problem">问题</a>
+          <a href="#solution">方案</a>
+          <a href="#impact">结果</a>
+          <a class="primary" href="#takeaways">复盘</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap" role="main">
+      <section class="hero" aria-labelledby="title">
+        <div class="hero-card">
+          <div class="hero-inner">
+            <div class="kicker">
+              <span class="kicker-dot" aria-hidden="true"></span>
+              <span>写评返券 · MVP 版产品方案（2026-05-21）</span>
+            </div>
+
+            <h1 id="title">写评返券 <span class="h-latin">MVP</span></h1>
+            <p class="subtitle">
+              从“抖音评价有礼”调研出发，探索合规离店促评路径：商户出资 → 平台制券与发券 → 用户离店完成评价后获得全平台无门槛通用券，验证促评效率并提升评价供给。
+            </p>
+
+            <div class="hero-meta" aria-label="项目基本信息">
+              <div class="meta">
+                <div class="meta-label">主要负责模块</div>
+                <div class="meta-value">
+                  主攻 <span class="accent">B 端活动创建页</span>：字段与校验、门店选择与准入限制、协议签署与支付前二次确认。并配合推进创建链路埋点与灰度策略。
+                </div>
+              </div>
+              <div class="meta">
+                <div class="meta-label">项目范围与约束</div>
+                <div class="meta-value">
+                  以 <span class="accent">MVP</span> 验证促评效率与合规路径；控制风险用户过滤、字数门槛、频控与预算上限；兼顾商户可用性与资金结算可行性。
+                </div>
+              </div>
+              <div class="meta">
+                <div class="meta-label">商业价值</div>
+                <div class="meta-value">
+                  让商户促评预算“回流”，用标准化官方工具在离店场景拉动增量评价，并提升高质量内容占比与星级校准。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats" aria-label="MVP 验证结果摘要">
+            <div class="stat">
+              <div class="stat-num"><span class="accent">102</span></div>
+              <div class="stat-label">门店上线（两个月）</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num"><span class="accent">43</span></div>
+              <div class="stat-label">覆盖城市</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num"><span class="accent">100,780</span></div>
+              <div class="stat-label">商家充值金额（元）</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num"><span class="accent">485</span></div>
+              <div class="stat-label">新增评价（条）</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">39<span class="accent">%</span></div>
+              <div class="stat-label">高质量评价占比</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="layout">
+        <aside class="toc" aria-label="目录">
+          <div class="toc-title">目录</div>
+          <a href="#overview">0. 项目概览</a>
+          <a href="#background" class="sub">0.1 背景与目标</a>
+          <a href="#role" class="sub">0.2 角色与边界</a>
+          <a href="#problem">1. 核心问题</a>
+          <a href="#hypothesis">2. 关键假设</a>
+          <a href="#solution">3. 产品方案</a>
+          <a href="#bside" class="sub">3.1 B 端：创建与管理</a>
+          <a href="#money" class="sub">3.2 资金链路与制发券</a>
+          <a href="#cside" class="sub">3.3 C 端：激励展示与发奖</a>
+          <a href="#tracking">4. 埋点与衡量</a>
+                    <a href="#collab">5. 协同与对接</a>
+          <a href="#impact">6. 结果与指标</a>
+          <a href="#takeaways">7. 复盘与下一步</a>
+        </aside>
+
+        <div class="content">
+          <div class="section-pair">
+          <section id="overview" class="card" aria-labelledby="overview-title">
+            <h2 id="overview-title">0. 项目概览</h2>
+            <p class="lead">
+              写评返券用于探索“商户自营销的离店促评”路径：商户出资，平台将充值金额转化为全平台无门槛通用券，并通过用户画像圈选在离店写评场景透出激励；用户完成评价并通过审核后发券。
+            </p>
+            <div class="grid3" aria-label="项目要点">
+              <div class="meta">
+                <div class="meta-label">用户</div>
+                <div class="meta-value">离店待评价用户、低写评率用户；同时面向有促评预算的餐饮/到综商户。</div>
+              </div>
+              <div class="meta">
+                <div class="meta-label">场景</div>
+                <div class="meta-value">待评价页、订单中心、核销完成页、点餐订单页、私信消息等高触达链路。</div>
+              </div>
+              <div class="meta">
+                <div class="meta-label">机制</div>
+                <div class="meta-value">任务频控、风险用户过滤、<span class="hl">3</span> 秒审核、异常重试与下线退款规则。</div>
+              </div>
+            </div>
+
+            <h3>流程图</h3>
+            <div class="img-grid cols-2" aria-label="业务与系统流程图">
+              <figure>
+                <img class="img" src="./images-xieping/img-01.png" alt="业务流程图（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>业务流程图：商家创建活动 → 用户写评 → 审核 → 发券</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-22.png" alt="系统流程图（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>系统流程图：资金/制券/发券/风控等系统协作</figcaption>
+              </figure>
+            </div>
+
+            <div class="callout" aria-label="阅读提示">
+              <p class="callout-title callout-title-light" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>阅读提示</p>
+
+              <p class="lead muted">若关注主要负责的关键部分，可直接跳到「3.1 B 端」模块。</p>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">用<strong>"场景—用户—机制"</strong>三维框架拆解复杂业务，从用户旅程出发定义产品边界，而非从功能列表出发。这是大厂PM结构化拆解的基本功。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="background" class="card" aria-labelledby="background-title">
+            <h2 id="background-title">0.1 背景与目标</h2>
+            <p class="lead">
+              通过对“抖音评价有礼”等外部方案调研，发现离店场景促评对评价供给有显著拉动价值。与此同时，平台端评价供给出现下滑，需要在合规前提下探索更可持续的促评工具。
+            </p>
+            <div class="grid2">
+              <div class="meta">
+                <div class="meta-label">大盘现状（痛点信号）</div>
+                <div class="meta-value">
+                  2026 年 3 月日均可展示评价量同比 <span class="hl">-29.35%</span>；交易后转评率同比 <span class="hl">-14.2%</span> 且持续下滑；评价作者规模同比 <span class="hl">-30.27%</span>。
+                </div>
+              </div>
+              <div class="meta">
+                <div class="meta-label">业务目标（收益预期）</div>
+                <div class="meta-value">
+                  月均新增合作门店 <span class="hl">1–1.5 万</span>；在线商家规模 M9 <span class="hl">5 万+</span>、M12 <span class="hl">9 万+</span>；M9 月引入预算 <span class="hl">1100 万</span>、M12 <span class="hl">1980 万</span>；活动商家日均新增可展示评价 M12 <span class="hl">6.6 万+</span>，其中 <span class="hl">40%</span> 为高质量评价。
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">从大盘信号（日均评价-29%）到分阶段量化目标（M9/M12），形成<strong>"数据→洞察→目标"</strong>推导链路。这是"用数据说话"的核心能力。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="role" class="card" aria-labelledby="role-title">
+            <h2 id="role-title">0.2 角色与边界</h2>
+以 MVP 为目标，我的交付聚焦"能跑通、可衡量、可扩张"。本项目中，我负责了 B 端活动创建页与关键校验链路的完整设计与交付。
+            <div class="grid2" aria-label="职责与边界">
+              <div class="meta">
+                <div class="meta-label">我负责</div>
+                <div class="meta-value">
+                  <span class="pill"><span class="accent">01</span> 定义方向</span>
+                  <span class="pill"><span class="accent">02</span> 端到端链路</span>
+                  <span class="pill"><span class="accent">03</span> B 端创建页</span>
+                  <span class="pill"><span class="accent">04</span> 埋点与灰度</span>
+                  <div style="height: 10px"></div>
+                  重点把活动创建页做成“可规模化投放的标准入口”：字段结构、校验逻辑、边界与异常提示、以及创建到支付的关键转化路径；同时协同推进资金/制券链路可行性评估。
+                </div>
+              </div>
+              <div class="meta">
+                <div class="meta-label">不在本阶段做</div>
+                <div class="meta-value">
+                  深度算法投放与精细化调度（阶段二/三逐步接入）；营销频道页建设（阶段三）；全渠道招商能力规模化（依赖入口扩张与外部渠道）。
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text"><strong>"能跑通、可衡量、可扩张"</strong>三原则定义MVP边界。MVP不是缩小版产品，而是验证假设的最小实验——大厂PM的"假设驱动"思维。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="problem" class="card" aria-labelledby="problem-title">
+            <h2 id="problem-title">1. 核心问题</h2>
+            <ul class="list">
+              <li>评价供给下滑，店外评价增长未补齐店内评价规模下滑缺口。</li>
+              <li>商户促评预算外流：原本用于促评的预算转移到竞争平台或被用于其他促销。</li>
+              <li>商户经营结构分层明显：约 600 万境内有效美食商户中，近 2/3 的商户 <span class="hl">30</span> 天内无新增评价。</li>
+            </ul>
+            <div class="callout" aria-label="策略结论">
+              <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>策略结论</p>
+              <p class="lead">
+                用“官方合规促评工具”把预算回流到平台，并用券化方式降低财税与合规风险；通过画像圈选与频控提升预算利用效率，优先拉动低写评率用户的增量评价。这背后是平台、商户、用户三方共赢的价值主张。
+              </p>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">从<strong>供给侧、竞争侧、结构侧</strong>三维度定义问题。"平台—商户—用户三方共赢"体现商业思维。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="hypothesis" class="card" aria-labelledby="hypothesis-title">
+            <h2 id="hypothesis-title">2. 关键假设（MVP 需要验证）</h2>
+            <ul class="list">
+              <li>
+                以“无门槛通用券”替代返现，能够在合规可控前提下保持促评激励力度，并显著提升写评触发与完成率。
+              </li>
+              <li>激励曝光覆盖到高流量离店场景，可在无需强运营下维持稳定的活动消耗与评价产出。</li>
+              <li>通过字数门槛、风控过滤与频控，能兼顾“评价规模”与“高质量占比”。</li>
+              <li>资金链路、制券与发券系统可在现有平台能力上以较小改造成本实现可规模化复用。</li>
+            </ul>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">4个假设覆盖<strong>激励、触达、质量、系统可行性</strong>——每个假设对应一个验证维度，形成"假设→验证→结论"闭环。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="solution" class="card" aria-labelledby="solution-title">
+            <h2 id="solution-title">3. 产品方案（端到端闭环）</h2>
+            <p class="lead">
+              商户在 B 端创建活动并充值，平台将金额转化为券预算并生成动态券模板；活动开始后，在 C 端离店写评链路展示激励，用户写评达标并通过审核后即时发券；活动结束或手动下线后，未消耗预算按规则退款。
+            </p>
+            <img class="img" src="./images-xieping/img-02.png" alt="产品方案概览图（原文截图）" loading="lazy" decoding="async" />
+            <div class="grid2" aria-label="链路拆分">
+              <div class="meta">
+                <div class="meta-label">B 端（商家侧）</div>
+                <div class="meta-value">创建/管理活动、设置门店与券参数、签署协议、支付与退款、查看数据。</div>
+              </div>
+              <div class="meta">
+                <div class="meta-label">C 端（用户侧）</div>
+                <div class="meta-value">多点位激励曝光、写评承接、小橙条提示、审核与发券、站内信通知。</div>
+              </div>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">端到端闭环：B端创建→资金转化→C端激励→审核发券→退款。每环节明确输入输出，体现<strong>系统化产品思维</strong>。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="bside" class="card" aria-labelledby="bside-title">
+            <h2 id="bside-title">3.1 B 端：商家创建与管理活动</h2>
+            <p class="lead">
+B 端核心是 <span class="hl">活动创建页</span>——让商家通过一张表单，完成促评活动的规则配置、预算设定与合规校验，把"想投促评"变成系统可执行的任务。
+            </p>
+
+            <div class="callout" aria-label="主要负责模块">
+              <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>主要负责模块</p>
+              <ul class="list">
+                <li>入口与权限：灰度人群与城市等级控制；无权限时按钮置灰并给到原因提示。</li>
+                <li>创建页字段：标题、门店、时间、字数门槛、发券总量、券面额；自动计算总金额并引导商家选择合适档位。</li>
+                <li>关键校验：门店准入/冲突、金额上限、字数与券额联动、协议签署与支付前二次确认。</li>
+                <li>体验优化：默认页策略减少“空态迷路”；用“预置档位 + 联动默认值 + 强校验”提升成功率；支付前二次确认降低误配风险。</li>
+              </ul>
+            </div>
+
+            <h3>活动创建页：信息结构</h3>
+            <figure class="figure" aria-label="活动创建页示意图">
+              <div class="figure-media">
+                <svg viewBox="0 0 980 420" role="img" aria-label="B端活动创建页示意：表单结构与关键校验点">
+                  <defs>
+                    <linearGradient id="g1" x1="0" x2="1">
+                      <stop offset="0" stop-color="#ff8041" stop-opacity="0.22" />
+                      <stop offset="1" stop-color="#ffffff" stop-opacity="0.05" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="0" y="0" width="980" height="420" rx="18" fill="url(#g1)" />
+
+                  <rect x="26" y="26" width="270" height="368" rx="22" fill="rgba(0,0,0,0.28)" stroke="rgba(255,255,255,0.16)" />
+                  <rect x="52" y="48" width="218" height="22" rx="10" fill="rgba(255,255,255,0.10)" />
+                  <rect x="52" y="86" width="218" height="40" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" />
+                  <rect x="52" y="136" width="218" height="52" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" />
+                  <rect x="52" y="198" width="218" height="44" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" />
+                  <rect x="52" y="252" width="218" height="44" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" />
+                  <rect x="52" y="306" width="218" height="44" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" />
+                  <rect x="52" y="360" width="218" height="18" rx="9" fill="rgba(255,128,65,0.22)" stroke="rgba(255,128,65,0.5)" />
+
+                  <g fill="#ffffff" fill-opacity="0.86" font-family="Alibaba PuHuiTi, system-ui, sans-serif" font-size="12">
+                    <text x="58" y="112">活动标题（≤20字）</text>
+                    <text x="58" y="158">活动门店（最多500家）</text>
+                    <text x="58" y="224">开始时间（T+1 ~ T+180）</text>
+                    <text x="58" y="278">字数门槛（15/30）</text>
+                    <text x="58" y="332">发券总量 / 券面额</text>
+                    <text x="58" y="374">同意协议并支付</text>
+                  </g>
+
+                  <g>
+                    <circle cx="330" cy="102" r="12" fill="#ff8041" />
+                    <text x="330" y="106" text-anchor="middle" font-family="Unbounded, system-ui, sans-serif" font-size="12" fill="#131313">1</text>
+                    <circle cx="330" cy="160" r="12" fill="#ff8041" />
+                    <text x="330" y="164" text-anchor="middle" font-family="Unbounded, system-ui, sans-serif" font-size="12" fill="#131313">2</text>
+                    <circle cx="330" cy="224" r="12" fill="#ff8041" />
+                    <text x="330" y="228" text-anchor="middle" font-family="Unbounded, system-ui, sans-serif" font-size="12" fill="#131313">3</text>
+                    <circle cx="330" cy="332" r="12" fill="#ff8041" />
+                    <text x="330" y="336" text-anchor="middle" font-family="Unbounded, system-ui, sans-serif" font-size="12" fill="#131313">4</text>
+                  </g>
+
+                  <g stroke="rgba(255,255,255,0.18)">
+                    <line x1="346" y1="102" x2="460" y2="102" />
+                    <line x1="346" y1="160" x2="460" y2="160" />
+                    <line x1="346" y1="224" x2="460" y2="224" />
+                    <line x1="346" y1="332" x2="460" y2="332" />
+                  </g>
+
+                  <g font-family="Alibaba PuHuiTi, system-ui, sans-serif" font-size="13" fill="rgba(255,255,255,0.92)">
+                    <text x="470" y="106">门店准入与冲突校验：双证齐全；同门店同时间仅 1 个活动</text>
+                    <text x="470" y="164">门店筛选体验：搜索 / 省市筛选 / 多选上限提示</text>
+                    <text x="470" y="228">时间约束：最早 T+1 生效、最晚 T+180；提示"为什么不能选今天"</text>
+                    <text x="470" y="336">金额强校验：总金额 = 总量×面额；>5万元强提示要求调整</text>
+                  </g>
+                </svg>
+              </div>
+              <figcaption class="figure-caption">
+                <strong>图 1</strong>：活动创建页的字段结构与关键校验点。页面目标是让商家“少输入也能配好”，同时让系统“能安全执行投放与发奖”。
+              </figcaption>
+            </figure>
+
+            <h3>创建页关键规则（梳理）</h3>
+            <div class="kv" aria-label="创建页关键规则">
+              <div class="kv-row">
+                <div class="kv-k">门店准入</div>
+                <div class="kv-v">餐门店需双证齐全；同一门店同一时间仅允许参与 1 个写评返券活动。</div>
+              </div>
+              <div class="callout collapsible" aria-label="活动冲突校验设计说明" id="conflict-check-callout">
+                <button class="collapsible-trigger" aria-expanded="false" aria-controls="conflict-check-content" id="conflict-check-trigger">
+                  <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>为什么设计活动冲突校验？<span aria-hidden="true" class="collapsible-icon">▶</span></p>
+                </button>
+                <div class="collapsible-content" id="conflict-check-content" aria-hidden="true">
+                  <div class="kv" aria-label="活动冲突校验说明">
+                    <div class="kv-row">
+                      <div class="kv-k">风险场景示例</div>
+                      <div class="kv-v">
+                        若同一门店同时参加两个写评返券活动：<br>
+                        • 活动A：写15字返10元<br>
+                        • 活动B：写30字返20元<br>
+                        用户满足其中一个活动要求时，可能重复获得激励。
+                      </div>
+                    </div>
+                    <div class="kv-row">
+                      <div class="kv-k">引发的核心问题</div>
+                      <div class="kv-v">
+                        • 商家预算失控：同一评价被多次发放优惠券，造成预算浪费<br>
+                        • 用户规则理解困难：多活动规则重叠，用户难以清晰知晓激励条件
+                      </div>
+                    </div>
+                    <div class="kv-row">
+                      <div class="kv-k">最终规则设定</div>
+                      <div class="kv-v">同一门店同一时间仅允许参加一个写评返券活动，从机制上避免重复发奖风险，保障预算可控。</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <script>
+                // 为活动冲突校验模块添加展开收起交互
+                (function() {
+                  const trigger = document.getElementById('conflict-check-trigger');
+                  const content = document.getElementById('conflict-check-content');
+                  const icon = trigger.querySelector('.collapsible-icon');
+                  const callout = document.getElementById('conflict-check-callout');
+                  
+                  if (!trigger || !content) return;
+                  
+                  trigger.addEventListener('click', function() {
+                    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                    // 切换展开/收起状态
+                    trigger.setAttribute('aria-expanded', !isExpanded);
+                    content.setAttribute('aria-hidden', isExpanded);
+                  
+                    // 切换内容显示
+                    content.classList.toggle('active', !isExpanded);
+                    callout.classList.toggle('expanded', !isExpanded);
+                  });
+                })();
+              </script>
+
+              <style>
+                /* 折叠模块基础样式 */
+                .collapsible {
+                  position: relative;
+                  transition: all 0.3s ease;
+                }
+                .collapsible-trigger {
+                  width: 100%;
+                  background: none;
+                  border: none;
+                  padding: 0;
+                  cursor: pointer;
+                  color: inherit;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                }
+                .collapsible-icon {
+                  display: inline-block;
+                  transition: transform 0.3s ease;
+                  margin-left: auto;
+                  padding-left: 8px;
+                }
+                .collapsible-content {
+                  max-height: 0;
+                  overflow: hidden;
+                  opacity: 0;
+                  transition: all 0.3s ease;
+                }
+                .collapsible-content.active {
+                  max-height: 1000px;
+                  opacity: 1;
+                  margin-top: 16px;
+                }
+                .callout.collapsible .callout-title {
+                  margin: 0;
+                  cursor: pointer;
+                  display: flex;
+                  width: 100%;
+                  align-items: center;
+                }
+                .collapsible[aria-expanded="true"] .collapsible-icon,
+                .collapsible.expanded .collapsible-icon {
+                  transform: rotate(90deg);
+                }
+              </style>
+              <div class="kv-row">
+                <div class="kv-k">活动时间</div>
+                <div class="kv-v">最早 <span class="hl">T+1</span> 生效，最晚 <span class="hl">T+1</span>80；默认避免配置“立刻生效”引发履约与审核边界问题。</div>
+              </div>
+              <div class="kv-row">
+                <div class="kv-k">字数与券额</div>
+                <div class="kv-v">默认 <span class="hl">15</span> 字；可选 <span class="hl">30</span> 字（联动默认券额 <span class="hl">15</span> 元/张），减少商家纠结与配置错误。</div>
+              </div>
+              <div class="callout collapsible" aria-label="发券总量档位设计说明" id="coupon-quota-callout">
+                <button class="collapsible-trigger" aria-expanded="false" aria-controls="coupon-quota-content" id="coupon-quota-trigger">
+                  <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>为什么预置发券总量档位为200、500、1000张？<span aria-hidden="true" class="collapsible-icon">▶</span></p>
+                </button>
+                <div class="collapsible-content" id="coupon-quota-content" aria-hidden="true">
+                  <div class="grid3" style="margin-top: 16px; gap: 16px;">
+                    <div class="meta" style="background: rgba(255,128,65,0.08); padding: 16px; border-radius: 12px;">
+                      <div class="meta-label"><span class="accent">200张</span> · 小商家</div>
+                      <div class="meta-value">
+                        <strong>典型场景</strong><br>
+                        县城餐馆、社区门店、小型咖啡店<br><br>
+                        <strong>测算逻辑</strong><br>
+                        日均3条评价 × 60天 ≈ 180条，接近200张的总量设计，匹配小门店的自然评价产出节奏。
+                      </div>
+                    </div>
+                    <div class="meta" style="background: rgba(255,128,65,0.15); padding: 16px; border-radius: 12px; border: 1px solid rgba(255,128,65,0.4);">
+                      <div class="meta-label"><span class="accent">500张（默认）</span> · 中腰部商家</div>
+                      <div class="meta-value">
+                        <strong>典型场景</strong><br>
+                        火锅店、连锁奶茶店、商场餐饮<br><br>
+                        <strong>测算逻辑</strong><br>
+                        日均8-10条评价 × 60天 ≈ 500条，覆盖国内绝大多数地级市商家的订单规模，因此设为默认档位。
+                      </div>
+                    </div>
+                    <div class="meta" style="background: rgba(255,128,65,0.08); padding: 16px; border-radius: 12px;">
+                      <div class="meta-label"><span class="accent">1000张</span> · 大型连锁</div>
+                      <div class="meta-value">
+                        <strong>典型场景</strong><br>
+                        海底捞、瑞幸等全国连锁品牌<br><br>
+                        <strong>测算逻辑</strong><br>
+                        多门店布局、订单量高，需要更大的预算池支撑活动周期内的激励发放，匹配连锁品牌的经营规模。
+                      </div>
+                    </div>
+                  </div>
+                  <div style="margin-top: 16px; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <p class="lead" style="margin: 0; font-size: 14px;">档位本质是运营分层：200→500→1000的梯度，对应小商家→中商家→大商家的需求差异，用预置档位降低商家配置成本，同时匹配不同规模门店的实际评价产出能力。</p>
+                  </div>
+                </div>
+              </div>
+              <script>
+                // 为发券总量档位设计模块添加展开收起交互
+                (function() {
+                  const trigger = document.getElementById('coupon-quota-trigger');
+                  const content = document.getElementById('coupon-quota-content');
+                  const icon = trigger.querySelector('.collapsible-icon');
+                  const callout = document.getElementById('coupon-quota-callout');
+                  
+                  if (!trigger || !content) return;
+                  
+                  trigger.addEventListener('click', function() {
+                    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                    // 切换展开/收起状态
+                    trigger.setAttribute('aria-expanded', !isExpanded);
+                    content.setAttribute('aria-hidden', isExpanded);
+                  
+                    // 切换内容显示
+                    content.classList.toggle('active', !isExpanded);
+                    callout.classList.toggle('expanded', !isExpanded);
+                  });
+                })();
+              </script>
+              <div class="callout collapsible" aria-label="券面额设计说明" id="coupon-amount-callout">
+                <button class="collapsible-trigger" aria-expanded="false" aria-controls="coupon-amount-content" id="coupon-amount-trigger">
+                  <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>为什么券面额设置为10元、15元、20元，上限100元？<span aria-hidden="true" class="collapsible-icon">▶</span></p>
+                </button>
+                <div class="collapsible-content" id="coupon-amount-content" aria-hidden="true">
+                  <div class="grid3" style="margin-top: 16px; gap: 16px;">
+                    <div class="meta" style="background: rgba(255,128,65,0.08); padding: 16px; border-radius: 12px;">
+                      <div class="meta-label"><span class="accent">下限10元</span> · 基础激励阈值</div>
+                      <div class="meta-value">
+                        <strong>为什么不选1元？</strong><br>
+                        1元激励感知太弱，无法驱动用户完成写评动作，不符合用户心理账户的获得感门槛。<br><br>
+                        <strong>为什么是10元？</strong><br>
+                        10元在餐饮场景中已经具备明确的激励价值，用户能清晰感知到"写15字得10元券"的收益，足够触发行为转化。
+                      </div>
+                    </div>
+                    <div class="meta" style="background: rgba(255,128,65,0.15); padding: 16px; border-radius: 12px; border: 1px solid rgba(255,128,65,0.4);">
+                      <div class="meta-label"><span class="accent">梯度15元</span> · 质量激励设计</div>
+                      <div class="meta-value">
+                        <strong>为什么设置15元档位？</strong><br>
+                        为了拉动评价质量，设计梯度激励机制：<br>
+                        • 15字评价 → 10元券<br>
+                        • 30字评价 → 15元券<br><br>
+                        通过更高奖励引导用户输出更丰富的评价内容，实现"高质量评价→更高奖励"的正向循环，兼顾评价规模与内容质量。
+                      </div>
+                    </div>
+                    <div class="meta" style="background: rgba(255,128,65,0.08); padding: 16px; border-radius: 12px;">
+                      <div class="meta-label"><span class="accent">补充20元</span> · 业态适配设计</div>
+                      <div class="meta-value">
+                        <strong>为什么增加20元？</strong><br>
+                        满足高客单价行业的激励需求，如美容、酒店、丽人等业态：<br>
+                        这类行业客单价普遍300+，10元激励力度不足，20元能匹配其经营规模与用户预期。<br><br>
+                        <strong>为什么上限100元？</strong><br>
+                        避免用户为了奖励写虚假评价，防止激励过度反噬评价真实性，同时降低风控与内容审核压力。
+                      </div>
+                    </div>
+                  </div>
+                  <div style="margin-top: 16px; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <p class="lead" style="margin: 0; font-size: 14px;">面额设计本质是用户、商家、平台三方的平衡：既保证对用户的激励力度，又控制商家的投入成本，同时守住平台评价内容真实的生态底线。</p>
+                  </div>
+                </div>
+              </div>
+              <script>
+                // 为券面额设计模块添加展开收起交互
+                (function() {
+                  const trigger = document.getElementById('coupon-amount-trigger');
+                  const content = document.getElementById('coupon-amount-content');
+                  const icon = trigger.querySelector('.collapsible-icon');
+                  const callout = document.getElementById('coupon-amount-callout');
+                  
+                  if (!trigger || !content) return;
+                  
+                  trigger.addEventListener('click', function() {
+                    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                    // 切换展开/收起状态
+                    trigger.setAttribute('aria-expanded', !isExpanded);
+                    content.setAttribute('aria-hidden', isExpanded);
+                  
+                    // 切换内容显示
+                    content.classList.toggle('active', !isExpanded);
+                    callout.classList.toggle('expanded', !isExpanded);
+                  });
+                })();
+              </script>
+              <div class="kv-row">
+                <div class="kv-k">预算上限</div>
+                <div class="kv-v">总金额 = 发券总量 × 券面额；当总金额超过 <span class="hl">5</span> 万元，强校验提示必须调整。</div>
+              </div>
+              <div class="kv-row">
+                <div class="kv-k">协议与支付</div>
+                <div class="kv-v">
+                  <span class="tag"><i aria-hidden="true"></i>支付前二次确认</span>
+                  <span>浮层再次确认发券总量、券面额、活动总金额；协议首次强制阅读 5 秒后方可签署。</span>
+                </div>
+              </div>
+            </div>
+
+            <h3>页面流程</h3>
+            <div class="img-grid cols-1" aria-label="B端页面流程截图">
+              <figure>
+                <img class="img" src="./images-xieping/img-03.png" alt="入口及权限（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>入口及权限：入口布点、默认页策略、城市等级/人群包灰度、授权逻辑</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-04.png" alt="活动介绍页（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>0-活动介绍页：未创建活动时默认打开，引导“立即参与并创建活动”</figcaption>
+              </figure>
+              <figure>
+                <div class="img-grid cols-3" aria-label="活动创建页截图组">
+                  <img class="img" src="./images-xieping/img-05.png" alt="活动创建页截图 1（原文）" loading="lazy" decoding="async" />
+                  <img class="img" src="./images-xieping/img-06.png" alt="活动创建页截图 2（原文）" loading="lazy" decoding="async" />
+                  <img class="img" src="./images-xieping/img-07.png" alt="活动创建页截图 3（原文）" loading="lazy" decoding="async" />
+                </div>
+                <figcaption>1-活动创建页：标题/门店/时间/字数/发券总量/券面额配置与校验</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-08.png" alt="协议签署（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>2-协议签署：首次强制阅读 5 秒；已签署后再次勾选无需强制阅读</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-09.png" alt="商家支付信息确认（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>3-商家支付信息确认：支付前二次确认发券总量/券面额/总金额，降低误配风险</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-10.png" alt="活动创建成功页（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>4-活动创建成功页：确认创建成功时间，回到活动列表</figcaption>
+              </figure>
+
+              <figure>
+                <img class="img" src="./images-xieping/img-11.png" alt="活动列表页（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>5-活动列表页：状态、门店、发券数、起止时间；支持下线/详情/数据</figcaption>
+              </figure>
+              <figure>
+                <div class="img-grid cols-2" aria-label="活动详情页截图组">
+                  <img class="img" src="./images-xieping/img-12.png" alt="活动详情页截图 1（原文）" loading="lazy" decoding="async" />
+                  <img class="img" src="./images-xieping/img-13.png" alt="活动详情页截图 2（原文）" loading="lazy" decoding="async" />
+                </div>
+                <figcaption>6-活动详情页：活动配置、退款进度、已发券量实时展示与门店明细</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-14.png" alt="活动数据页（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>7-活动数据页：门店筛选、时间筛选、评价量与趋势展示</figcaption>
+              </figure>
+            </div>
+
+            <div class="callout" aria-label="默认页策略">
+              <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>默认页策略</p>
+              <p class="lead">
+                默认页策略减少“空态迷路”：未创建活动直达活动介绍页；已创建则直达活动列表页。创建页用“预置档位 + 联动默认值 + 强校验”提升成功率，并配合支付前二次确认降低误配与客诉风险。这背后是“让商家少输入也能配好，让系统能安全执行投放”的设计思路。
+              </p>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">产品设计的本质是<strong>"翻译"</strong>——在用户意图与系统能力间建立可执行映射，同时用强校验守住合规边界。"让商家少输入也能配好，让系统能安全执行"是产品原则的高度凝练。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="money" class="card" aria-labelledby="money-title">
+            <h2 id="money-title">3.2 资金链路与后台制发券</h2>
+            <p class="lead">
+              MVP 的关键在于把“商户充值”可靠地变成“可发放的通用券”，并能被业务规则与投放任务消费。方案以既有平台能力为主，新增最少必要接口。
+            </p>
+
+            <h3>制券与预算单号</h3>
+            <ul class="list">
+              <li>券业务单号（一次性手动）：向营销费用管理平台申请业务专属 PN 号长期复用。</li>
+              <li>制券（系统化）：商家报名充值后，实时获取门店名称、单券面额、总金额及映射关系，生成动态券模板并维护必要字段。</li>
+              <li>发券：权益平台基于券批次 ID 与动态字段信息按规则发放。</li>
+            </ul>
+
+            <div class="callout collapsible" aria-label="为什么改成券" id="why-coupon-callout">
+              <button class="collapsible-trigger" aria-expanded="false" aria-controls="why-coupon-content" id="why-coupon-trigger">
+                <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>关键决策：为什么是返券而不是返现？<span aria-hidden="true" class="collapsible-icon">▶</span></p>
+              </button>
+              <div class="collapsible-content" id="why-coupon-content" aria-hidden="true">
+                <div class="kv" aria-label="决策背景与方案">
+                  <div class="kv-row">
+                    <div class="kv-k">竞品现状</div>
+                    <div class="kv-v">抖音评价有礼主要采用现金激励模式</div>
+                  </div>
+                  <div class="kv-row">
+                    <div class="kv-k">现金模式痛点</div>
+                    <div class="kv-v">
+                      <ul class="list" style="margin: 0; padding-left: 1.2em;">
+                        <li>现金涉及财税合规风险</li>
+                        <li>用户提现链路流程复杂</li>
+                        <li>平台整体运营成本较高</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="kv-row">
+                    <div class="kv-k">最终方案</div>
+                    <div class="kv-v">商家出资 → 平台制券与发券 → 用户完成评价后得券</div>
+                  </div>
+                  <div class="kv-row">
+                    <div class="kv-k">方案优势</div>
+                    <div class="kv-v">
+                      <ul class="list" style="margin: 0; padding-left: 1.2em;">
+                        <li>合规性更高，降低财税与合规复杂度</li>
+                        <li>激励感知明确，保持对用户的促评力度</li>
+                        <li>券资金回流平台消费，提升平台留存</li>
+                        <li>券面额与数量可配置，预算转化效率可控</li>
+                        <li>便于后续精细化调度与运营策略扩展</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="kv-row">
+                    <div class="kv-k">核心原则</div>
+                    <div class="kv-v">商业闭环中需平衡合规要求、用户激励与平台成本三者关系</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <script>
+              // 为关键决策模块添加展开收起交互
+              (function() {
+                const trigger = document.getElementById('why-coupon-trigger');
+                const content = document.getElementById('why-coupon-content');
+                const callout = document.getElementById('why-coupon-callout');
+                
+                if (!trigger || !content) return;
+                
+                trigger.addEventListener('click', function() {
+                  const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                  // 切换展开/收起状态
+                  trigger.setAttribute('aria-expanded', !isExpanded);
+                  content.setAttribute('aria-hidden', isExpanded);
+                
+                  // 切换内容显示
+                  content.classList.toggle('active', !isExpanded);
+                  callout.classList.toggle('expanded', !isExpanded);
+                });
+              })();
+            </script>
+
+            <h3>报账/字段拼接</h3>
+            <p class="lead">
+              这是我主责的 B 端活动创建页在资金链路上的关键下游环节——商户充值后，系统需将门店、面额、金额等信息拼接为报账单据，驱动券的生成与发放，直接影响"商户付了钱能否顺利发出券"这一核心闭环。
+            </p>
+            <img class="img" src="./images-xieping/img-15.png" alt="报账接口与字段拼接示意（原文截图）" loading="lazy" decoding="async" />
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text"><strong>"以既有平台能力为主，新增最少必要接口"</strong>——在系统约束下做最小改造，体现对技术成本与上线效率的平衡判断。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="cside" class="card" aria-labelledby="cside-title">
+            <h2 id="cside-title">3.3 C 端：用户写评返券与使用</h2>
+            <p class="lead">
+              C 端以“任务化促评”承接：活动门店范围、字数门槛、券面额、发券数量、活动时间等参数自动生成投放任务，并在多渠道点位透出激励。
+            </p>
+
+            <h3>任务与风控</h3>
+            <ul class="list">
+              <li>任务生效：按活动开始时间生效；商家下线活动后任务立即停止，C 端同步停止展示。</li>
+              <li>审核机制：评价提交后字数达标，走 3 秒实时审核；超过 3 秒未返回视为超时通过。</li>
+              <li>风控：高风险用户不发奖；异常兜底 <span class="hl">24</span> 小时内重试 <span class="hl">3</span> 次。</li>
+              <li>频控：单门店单日累计返券 ≤ <span class="hl">100</span> 条（可配置）；单用户单门店 <span class="hl">30</span> 天内最多完成 1 次（可配置）。</li>
+            </ul>
+
+            <h3>激励曝光与承接</h3>
+            <ul class="list">
+              <li>覆盖渠道：待评价页、订单中心、核销完成页、点餐订单页、私信消息等；文案根据字数要求与券面额自动生成。</li>
+              <li>写中承接：写评价页展示小橙条提示“写 X 字评价，通过审核后必得 X 元无门槛券”，可点击查看规则。</li>
+              <li>写后反馈：字数不足提示“再写 a 字得 X 元券”；达标后按结果展示弹窗（成功/结算中/失败）。</li>
+              <li>通知：发券成功后实时推送站内信，跳转到券包并默认筛选“最新获得”。</li>
+            </ul>
+
+            <h3>C 端关键点位</h3>
+            <div class="img-grid cols-3" aria-label="C端入口点位截图">
+              <figure>
+                <img class="img" src="./images-xieping/img-23.png" alt="待评价页点位（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>待评价页：写评价模块</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-24.png" alt="订单中心点位（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>订单中心：写评价入口</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-25.png" alt="到综核销点位（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>核销完成/订单详情：写评气泡</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-16.png" alt="点餐订单页点位（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>点餐订单页：快捷打星写评卡片</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-26.png" alt="私信消息点位（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>私信/收藏任务：消息通知</figcaption>
+              </figure>
+            </div>
+
+            <h3>写中/写后承接</h3>
+            <div class="img-grid cols-2" aria-label="写中与写后承接截图">
+              <figure>
+                <img class="img" src="./images-xieping/img-17.png" alt="写评价页小橙条（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>写中：写评价页小橙条提示</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-18.png" alt="字数不足提示与编辑评价入口（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>写后：字数不足气泡提示，引导补写并重新结算任务</figcaption>
+              </figure>
+            </div>
+
+            <h3>奖励弹窗</h3>
+            <div class="img-grid cols-3" aria-label="奖励弹窗截图">
+              <figure>
+                <img class="img" src="./images-xieping/img-19.png" alt="获得奖券弹窗（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>获得奖券</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-20.png" alt="奖励结算中弹窗（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>奖励结算中</figcaption>
+              </figure>
+              <figure>
+                <img class="img" src="./images-xieping/img-21.png" alt="未获得奖券弹窗（原文截图）" loading="lazy" decoding="async" />
+                <figcaption>未获得奖券</figcaption>
+              </figure>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">任务化投放+多渠道触达+实时审核+风控频控——<strong>增长策略与风控治理并重</strong>，避免"只追规模忽视质量"的增长陷阱。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="tracking" class="card" aria-labelledby="tracking-title">
+            <h2 id="tracking-title">4. 埋点与衡量（让 MVP 可被证明）</h2>
+            <div class="grid2">
+              <div class="meta">
+                <div class="meta-label">B 端关注</div>
+                <div class="meta-value">
+                  入口点击 UV/PV、活动创建转化（介绍页 → 创建页 → 协议 → 支付成功）、下线率与退款成功率、活动数据页使用率。
+                </div>
+              </div>
+              <div class="meta">
+                <div class="meta-label">C 端关注</div>
+                <div class="meta-value">
+                  各点位曝光 UV/PV、去写评点击、写评提交、达标率、审核通过率、发券成功率；分高/低写评率用户对比增量贡献。
+                </div>
+              </div>
+            </div>
+            <div class="callout" aria-label="指标设计原则">
+              <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>指标设计原则</p>
+              <p class="lead">
+                同时衡量"规模"（曝光、转化、发券消耗、评价量）与"质量"（高质量占比、审核失败率、风控拦截、频控触发），避免只追求消耗导致内容劣化。这体现了在业务增长中对用户体验与平台生态的平衡考量。
+              </p>
+            </div>
+
+            <div class="callout callout-ai" aria-label="AI 辅助数据分析">
+              <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>AI + SQL：我的数据分析方式</p>
+              <p class="lead">
+                作为产品经理，我具备独立使用 SQL 取数分析的意识与能力。在本项目中，我借助 AI（如 ChatGPT / Copilot）辅助编写与优化 SQL 查询，快速实现双端漏斗各节点的转化率计算、门店维度的聚合分析、以及异常指标的定位排查。
+              </p>
+              <p class="lead" style="margin-top: 10px;">
+                具体实践：向 AI 描述业务口径和数据表结构 → AI 生成初版 SQL → 我审查逻辑并校准字段与筛选条件 → 在数据平台执行验证 → 迭代优化。这种"人定义问题、AI 加速执行"的协作模式，让我在不完全依赖数据团队排期的情况下，也能做到快速验证假设、及时发现数据异常。
+              </p>
+
+              <div class="ai-sql-flow">
+                <span class="flow-step">描述业务口径</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step">AI 生成 SQL</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step">审查 & 校准</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step">执行验证</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step">产出洞察</span>
+              </div>
+
+              <div class="ai-insights">
+                <div class="ai-insight-card">
+                  <div class="insight-label">B 端转化漏斗</div>
+                  <div class="insight-value">23<span class="insight-unit">%</span></div>
+                  <div class="insight-desc">介绍页→支付成功的<strong>端到端转化率</strong>，发现"协议签署"环节流失最大，推动简化协议流程</div>
+                </div>
+                <div class="ai-insight-card">
+                  <div class="insight-label">C 端写评漏斗</div>
+                  <div class="insight-value">8.6<span class="insight-unit">%</span></div>
+                  <div class="insight-desc">激励曝光→成功发券的<strong>全链路转化率</strong>，定位到"达标率"是关键瓶颈——用户写了但字数不够</div>
+                </div>
+                <div class="ai-insight-card">
+                  <div class="insight-label">门店聚合分析</div>
+                  <div class="insight-value">Top 10<span class="insight-unit">%</span></div>
+                  <div class="insight-desc">头部门店贡献了 <strong>62% 的总产评</strong>，据此建议运营聚焦高潜门店，提升预算 ROI</div>
+                </div>
+                <div class="ai-insight-card">
+                  <div class="insight-label">异常监控</div>
+                  <div class="insight-value">3<span class="insight-unit">例</span></div>
+                  <div class="insight-desc">通过 SQL 排查发现<strong>风控误拦截</strong>、频控阈值过低、退款状态不同步三类数据异常并推动修复</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">B端转化漏斗+C端行为漏斗，<strong>双端埋点形成完整数据闭环</strong>。</p>
+            </div>
+            <div class="anno-item anno-ai">
+              <span class="anno-badge anno-ai">AI 提效</span>
+              <p class="anno-text">借助 AI 辅助 SQL 取数，<strong>缩短"提需求→等排期→拿数据"的链路</strong>，让 PM 拥有独立验证假设的数据能力——这是 AI 时代产品经理的核心竞争力之一。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="collab" class="card" aria-labelledby="collab-title">
+            <h2 id="collab-title">5. 协同与对接（复杂度来自系统，而不是页面）</h2>
+            <p class="lead muted">
+              写评返券的核心难点是“资金与权益链路”跨多个平台。通过明确模块责任与关键事项，才能保证上线后资金可追溯、权益可控、客诉可处理。
+            </p>
+            <table class="table" aria-label="协同部门与关键事项">
+              <thead>
+                <tr>
+                  <th scope="col">协同平台</th>
+                  <th scope="col">负责模块</th>
+                  <th scope="col">关键事项</th>
+                  <th scope="col">对接</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>海螺合同平台</td>
+                  <td>合同签署</td>
+                  <td>合同模板修改、签署与留档；新业务模式合规确认</td>
+                  <td>法务 / 产品</td>
+                </tr>
+                <tr>
+                  <td>金融服务平台</td>
+                  <td>金融支付能力</td>
+                  <td>收款、退款等 B 端收银台能力；新业务模式改造评估</td>
+                  <td>支付侧</td>
+                </tr>
+                <tr>
+                  <td>结算平台</td>
+                  <td>结算能力</td>
+                  <td>交易后资金清算与结算处理</td>
+                  <td>结算侧</td>
+                </tr>
+                <tr>
+                  <td>报账平台</td>
+                  <td>报账能力</td>
+                  <td>财务报账；新业务模式是否需要修改</td>
+                  <td>财务 / 产品</td>
+                </tr>
+                <tr>
+                  <td>NEXT 平台</td>
+                  <td>制券平台</td>
+                  <td>动态券模板创建；制券规则与字段维护</td>
+                  <td>制券侧</td>
+                </tr>
+                <tr>
+                  <td>权益平台</td>
+                  <td>发券</td>
+                  <td>基于券批次与动态字段按规则完成发放</td>
+                  <td>权益侧</td>
+                </tr>
+                <tr>
+                  <td>风控平台</td>
+                  <td>风险用户过滤</td>
+                  <td>激励展示/发奖时过滤高风险用户与高风险商户</td>
+                  <td>风控侧</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">7个平台协同。<strong>"复杂度来自系统而非页面"</strong>——对B端产品本质的深度理解。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="impact" class="card" aria-labelledby="impact-title">
+            <h2 id="impact-title">6. 结果与指标（MVP 产出）</h2>
+            <p class="lead">
+              MVP 在上线后两个月、未主动运营情况下：共 <span class="hl">102</span> 家门店上线、覆盖 <span class="hl">43</span> 城市，商家充值 <span class="hl">100,780</span> 元；有产评门店 <span class="hl">42</span> 家、产评 <span class="hl">485</span> 条，高质量评价占比 <span class="hl">39%</span>；活动评价贡献占活动期间门店总产评 <span class="hl">16%</span>（部分门店达到 <span class="hl">30%+</span>）。
+            </p>
+            <div class="grid2">
+              <div class="meta">
+                <div class="meta-label">我最关注的“效率”指标</div>
+                <div class="meta-value">
+                  <span class="pill"><span class="accent">预算</span>→评价</span>
+                  <span class="pill"><span class="accent">曝光</span>→写评</span>
+                  <span class="pill"><span class="accent">审核</span>→发券</span>
+                  <div style="height: 10px"></div>
+                  在可控风险前提下，提高激励触达与转化，确保“预算消耗带来增量评价”，而不是无效曝光或羊毛。
+                </div>
+              </div>
+              <div class="meta">
+                <div class="meta-label">我最关注的“质量”指标</div>
+                <div class="meta-value">
+                  高质量占比、审核失败率、风控拦截比例、单店日频控触发、异常重试成功率与客诉量级，确保规模增长不以内容劣化为代价。
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text">同时关注<strong>"效率"（预算→评价）和"质量"（审核失败率、风控拦截）</strong>，避免单一指标导向。"活动评价贡献占门店总产评<span class="hl">16%</span>"——用相对增量衡量价值。</p>
+            </div>
+            <div class="anno-item anno-ai">
+              <span class="anno-badge anno-ai">AI 提效</span>
+              <p class="anno-text">上述 MVP 指标均通过 <strong>AI 辅助 SQL 自主取数验证</strong>——从漏斗转化到门店聚合分析，不依赖数据团队排期即可完成。</p>
+            </div>
+          </aside>
+          </div>
+
+          <div class="section-pair">
+          <section id="takeaways" class="card" aria-labelledby="takeaways-title">
+            <h2 id="takeaways-title">7. 复盘与下一步</h2>
+
+            <h3>做对了什么</h3>
+            <div style="display: grid; gap: 16px; margin-bottom: 32px;">
+              <div style="background: rgba(255,128,65,0.06); border-left: 3px solid #FF8041; border-radius: 0 12px 12px 0; padding: 20px 24px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                  <span style="background: #FF8041; color: #131313; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 4px;">MVP 拆解</span>
+                  <span style="color: rgba(255,255,255,0.5); font-size: 13px;">先证明机制，再做规模化</span>
+                </div>
+                <p class="lead" style="margin: 0 0 8px 0;">把复杂问题拆成可验证的 MVP：先证明"机制有效"，再做规模化与精细化。</p>
+                <p style="margin: 0; color: rgba(255,255,255,0.55); font-size: 14px; font-style: italic;">→ 体会到<strong style="color: #FF8041;">"用最小代价验证最大假设"</strong>的产品思维。</p>
+              </div>
+              <div style="background: rgba(255,128,65,0.06); border-left: 3px solid #FF8041; border-radius: 0 12px 12px 0; padding: 20px 24px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                  <span style="background: #FF8041; color: #131313; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 4px;">关键路径</span>
+                  <span style="color: rgba(255,255,255,0.5); font-size: 13px;">资金与权益链路优先</span>
+                </div>
+                <p class="lead" style="margin: 0 0 8px 0;">先把链路跑通并可追溯，才能谈扩点位和扩招商。</p>
+                <p style="margin: 0; color: rgba(255,255,255,0.55); font-size: 14px; font-style: italic;">→ 认识到跨团队协作中<strong style="color: #FF8041;">"系统链路"比"页面交互"更重要</strong>。</p>
+              </div>
+              <div style="background: rgba(255,128,65,0.06); border-left: 3px solid #FF8041; border-radius: 0 12px 12px 0; padding: 20px 24px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                  <span style="background: #FF8041; color: #131313; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 4px;">规则边界</span>
+                  <span style="color: rgba(255,255,255,0.5); font-size: 13px;">用规则守住系统底线</span>
+                </div>
+                <p class="lead" style="margin: 0 0 8px 0;">字数门槛、频控、风控过滤、退款规则，让系统可控可运营。</p>
+                <p style="margin: 0; color: rgba(255,255,255,0.55); font-size: 14px; font-style: italic;">→ 理解了产品设计中<strong style="color: #FF8041;">"合规与风控"是底线</strong>。</p>
+              </div>
+            </div>
+
+            <h3>如果再做一次，我会更早补齐</h3>
+            <div style="display: grid; gap: 16px; margin-bottom: 32px;">
+              <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start;">
+                <span style="background: rgba(255,128,65,0.15); color: #FF8041; font-size: 20px; font-weight: 700; min-width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0;">1</span>
+                <div>
+                  <p class="lead" style="margin: 0 0 6px 0;"><strong>商户侧 ROI 看板</strong>提前</p>
+                  <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 14px;">更直接地回答商户"花了多少钱，换来多少评价与星级变化"→ 更快验证<span style="color: #FF8041;">商业价值闭环</span>。</p>
+                </div>
+              </div>
+              <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start;">
+                <span style="background: rgba(255,128,65,0.15); color: #FF8041; font-size: 20px; font-weight: 700; min-width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0;">2</span>
+                <div>
+                  <p class="lead" style="margin: 0 0 6px 0;">多点位曝光做<strong>"优先级与分配"治理</strong></p>
+                  <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 14px;">减少不同激励任务之间的冲突与干扰 → 提升<span style="color: #FF8041;">用户体验与预算效率</span>。</p>
+                </div>
+              </div>
+              <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start;">
+                <span style="background: rgba(255,128,65,0.15); color: #FF8041; font-size: 20px; font-weight: 700; min-width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0;">3</span>
+                <div>
+                  <p class="lead" style="margin: 0 0 6px 0;">风险与客诉 <strong>SOP 产品化</strong></p>
+                  <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 14px;">让客服/商服处理路径更短、更标准 → 让产品在<span style="color: #FF8041;">规模化时更稳健</span>。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout" aria-label="下一步规划">
+              <p class="callout-title" style="font-family: 'Alibaba PuHuiTi', system-ui, sans-serif; font-weight: 900; font-style: italic;"><span aria-hidden="true"></span>下一步</p>
+              <p class="lead">
+                阶段二扩城市与点位，补齐招商入口；阶段三引入更精细的用户画像调度与营销频道页，让“促评”与“交易决策”更强绑定，实现评价增长与交易拉动双目标。
+              </p>
+            </div>
+          </section>
+          <aside class="annotation">
+            <div class="anno-item anno-pm">
+              <span class="anno-badge anno-pm">PM思维</span>
+              <p class="anno-text"><strong>"做对了什么"+"如果再做一次"</strong>双向复盘，体现成长型思维与自我迭代意识。下一步规划有明确阶段目标。</p>
+            </div>
+          </aside>
+          </div>
+
+          <footer class="footer" aria-label="页脚">
+            <div>
+              <strong>样式规范</strong>：底色 #131313｜重点色 #FF8041｜正文色 #FFFFFF｜标题字体 Unbounded（英数）+ 标题黑体（中文）｜正文与小标题 阿里巴巴普惠体
+            </div>
+            <div style="margin-top: 6px">本页为静态 HTML，可直接双击打开或用任意静态服务器预览。</div>
+          </footer>
+        </div>
+      </div>
+    </main>
+
+    <!-- Lightbox 模态框 -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightbox-close" aria-label="关闭">&times;</button>
+      <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="放大预览" />
+      </div>
+    </div>
+
+    <script>
+      // 图片点击放大交互（确保页面完全加载后绑定）
+      function initLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        
+        if (!lightbox) return;
+        
+        // 获取所有可点击的图片
+        const images = document.querySelectorAll('.img');
+        
+        images.forEach(img => {
+          img.addEventListener('click', function() {
+            lightboxImg.src = this.src;
+            lightboxImg.alt = this.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+        });
+        
+        // 关闭 lightbox
+        function closeLightbox() {
+          lightbox.classList.remove('active');
+          document.body.style.overflow = '';
+          // 延迟清空 src 释放内存
+          setTimeout(function() { lightboxImg.src = ''; }, 300);
+        }
+        
+        lightboxClose.addEventListener('click', closeLightbox);
+        
+        // 点击背景关闭
+        lightbox.addEventListener('click', function(e) {
+          if (e.target === lightbox) {
+            closeLightbox();
+          }
+        });
+        
+        // ESC 键关闭
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+          }
+        });
+      }
+      
+      // 确保 DOM 完全加载后执行
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLightbox);
+      } else {
+        initLightbox();
+      }
+    </script>
+
+    <!-- 思考标注切换按钮 -->
+    <button class="anno-toggle" id="annoToggle" aria-label="切换思考标注显示">思考标注：开</button>
+    <script>
+      (function() {
+        var toggle = document.getElementById('annoToggle');
+        var body = document.body;
+        toggle.addEventListener('click', function() {
+          body.classList.toggle('anno-hidden');
+          toggle.textContent = body.classList.contains('anno-hidden') ? '思考标注：关' : '思考标注：开';
+        });
+      })();
+    </script>
+  </body>
+</html>
